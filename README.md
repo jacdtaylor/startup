@@ -12,4 +12,24 @@ Have you ever been frustrated with a group project? Have you ever been overwhelm
 
 ### Concept Art
 
-!()[]
+!(Sample UI)["TaskManagerSampleUI.jpg"]
+
+### Key Features
+
+- Secure login
+- Able to add, edit and delete tasks
+- Real-time updating in shared boards
+- Tasks are stored under user profiles
+- Ability to see previously completed tasks
+
+### Technologies
+
+This is how each technology will be used: 
+
+- **HTML** - Using HTML to create correct pages for the application. A login page will be created and a page for organizing tasks.
+- **CSS** - Uses this to create an appealing UI which correctly and simply organizes tasks.
+- **JavaScript** - Allows login, adding, editing, completing, and deleting tasks. 
+- **Service**  - Service endpoints of login, editing tasks, and completing tasks.
+- **DB/Login** - Store users, boards and tasks. 
+- **WebSocket** - As changes are made in certain boards, those boards are updated for other users.
+- **React** - Port application to use the React web framework.
