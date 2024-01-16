@@ -12,7 +12,7 @@ Have you ever been frustrated with a group project? Have you ever been overwhelm
 
 ### Concept Art
 
-!(Sample UI)["TaskManagerSampleUI.jpg"]
+!(Sample UI)[`TaskManagerSampleUI.jpg`]
 
 ### Key Features
 
