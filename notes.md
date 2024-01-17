@@ -69,3 +69,12 @@ Here is a simple footnote[^1].
 > Advises about risks or negative outcomes of certain actions. \[!CAUTION]
 
 <\!-- This content will not appear in the rendered Markdown -->
+
+
+
+## My Website
+
+[Here is the Link!](http://52.5.186.106/)
+
+
+ ssh -i C:\Users\jacdt\Desktop\CS_260\taskmaster.pem ubuntu@52.5.186.106
