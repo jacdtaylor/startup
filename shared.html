@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Tell browsers not to scale the viewport automatically -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     
+    <title>CTM HTML</title>
+    <link rel="icon" href="favicon.ico" />
+  </head>
+  <body>
+    <style>
+    .task {
+      width: 200px;
+      height: 150px;
+      background-color: #FF6961; /* Set the background color of the square */
+      color: #000000; /* Set the text color */
+      text-align: center; /* Center the text horizontally */
+      line-height: 100px; /* Center the text vertically */
+      font-family: Arial, sans-serif; /* Set the font family */
+    }
+  </style>
+    <!-- Use header, main, and footer elements to give semantic structure -->
+    <header>
+      <h1>Colab Task Manager<sup>&reg;</sup></h1>
+
+      <!-- Navigation elements -->
+      <nav>
+        <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="manager.html">Personal Manager</a></li>
+          <li><a href="shared.html">Shared Tasks</a></li>
+          <li><a href="about.html">About</a></li>
+        </menu>
+      </nav>
+
+      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+      <hr />
+    </header>
+    
+    
+    <main>
+      <div class="user">
+        User:
+        <span class="user-name">John Doe</span>
+      </div>
+      
+
+      <!-- More formatting with old style HTML -->
+      <br />
+
+
+
+      <div>
+<button style="width: 200px; height: 25px;">Remove From Shared</button> 
+      </div>
+      <br />
+
+      
+        <div class="task">
+          Sample Shared Task
+        </div>
+      
+      <div>
+        <button style="width: 200px; height: 25px;">Mark As Complete</button>
+      </div>
+      <div>
+        <table>
+  <tr>
+    <td>
+      <button>
+        <svg aria-hidden="true" viewBox="0 0 100 100" height="50" width="80">
+          <path d="M0 50 L90 80 L90 20 Z" fill="blue" />
+        </svg>
+      </button>
+    </td>
+    <td>
+      <button>
+        <svg aria-hidden="true" viewBox="0 0 100 100" height="50" width="80">
+          <path d="M90 50 L0 80 L0 20 Z" fill="red" />
+        </svg>
+      </button>
+    </td>
+  </tr>
+</table>
+
+
+      </div>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Author Name(s)</span>
+      <br />
+      <a href="https://github.com/webprogramming260/simon-html">GitHub</a>
+    </footer>
+  </body>
+</html>
