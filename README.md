@@ -37,10 +37,10 @@ This is how each technology will be used:
 
 ## HTML Deliverable
 
-**HTML pages** - Four HTML pages that corrospond with login, personal tasks, shared tasks, and more information.
-**Links** - Links to each page are accessable to freely navigate.
-**Text** - Text is found on each button option and Placeholder text on tasks.
-**Images** - Flavicon Icon added.
-**DB/Login** - Placeholder for login, Placeholder on tasks from where it would pull from the database.
-**3rd Party Call** - Date task was created will be pulled from a 3rd party API.
-**WebSocket** - The shared tasks will be updated as others make changes to tasks.
+**HTML pages** - Four HTML pages that corrospond with login, personal tasks, shared tasks, and more information.  
+**Links** - Links to each page are accessable to freely navigate.  
+**Text** - Text is found on each button option and Placeholder text on tasks.  
+**Images** - Flavicon Icon added.  
+**DB/Login** - Placeholder for login, Placeholder on tasks from where it would pull from the database.  
+**3rd Party Call** - Date task was created will be pulled from a 3rd party API.  
+**WebSocket** - The shared tasks will be updated as others make changes to tasks.  
