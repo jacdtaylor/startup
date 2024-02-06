@@ -11,38 +11,22 @@
   </head>
   <body>
     <style>
-    .task {
-      width: 200px;
-      height: 200px;
-      background-color: #FF6961;
-      color: #000000;
-      text-align: center; 
-      line-height: 100px; 
-      font-family: Arial, sans-serif;
-    } 
+    
   </style> 
     <!-- Use header, main, and footer elements to give semantic structure -->
     <header>
-      <h1>Colab Task Manager<sup>&reg;</sup></h1>
-
-      <!-- Navigation elements -->
-      <nav>
-        <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
-        <menu>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="manager.html">Personal Manager</a></li>
-          <li><a href="shared.html">Shared Tasks</a></li>
-          <li><a href="about.html">About</a></li>
-        </menu>
-      </nav>
-
-      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
-      <hr />
-      <div class="user">
-        User:
-        <span class="user-name">John Doe</span>
+      <div class="header-content">
+        <h1>Colab Task Manager<sup>&reg;</sup></h1>
+        <div class="dropdown">
+          <button class="dropbtn">Menu</button>
+          <div class="dropdown-content">
+            <a href="index.html">Home</a>
+            <a href="manager.html">Personal Manager</a>
+            <a href="shared.html">Shared Tasks</a>
+            <a href="about.html">About</a>
+          </div>
+        </div>
       </div>
-      
     </header>
     
     
