@@ -203,8 +203,15 @@ header {
     }
 
     .remove:hover {
-      color:#ff6d6d;
+      color:#7a7a7a;
       background-color: rgb(46, 46, 46);
       cursor: pointer;
 
+    }
+
+
+    .username {
+      text-align: left;
+      color:#929292;
+      text-shadow: 0px 0px 0px #000000;
     }
