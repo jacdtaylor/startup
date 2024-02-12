@@ -44,3 +44,7 @@ This is how each technology will be used:
 **DB/Login** - Placeholder for login, Placeholder on tasks from where it would pull from the database.  
 **3rd Party Call** - Date task was created will be pulled from a 3rd party API.  
 **WebSocket** - The shared tasks will be updated as others make changes to tasks.  
+
+## CSS Deliverable
+
+Added basic CSS styling and responsive design
