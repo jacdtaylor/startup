@@ -15,6 +15,7 @@
   </style> 
     <!-- Use header, main, and footer elements to give semantic structure -->
     <header>
+
       <div class="header-content">
         <h1>Colab Task Manager<sup>&reg;</sup></h1>
         <div class="dropdown">
@@ -37,16 +38,16 @@
       <br />
 
 
-
-      <div>
-        <button>Create Task</button>
-        <button>Edit Task</button>
-      </div>
-      <br />
-      <div>
-        <button>Share Task</button>
-        <button>Delete Task</button>
-      </div>
+      <table class = "TableButtons">
+        <tr>
+          <td><button class="mainbutton">Create Task</button></td>
+          <td><button class="mainbutton">Edit Task</button></td>
+        </tr>
+        <tr>
+          <td><button class="mainbutton">Share Task</button></td>
+          <td><button class="mainbutton">Delete Task</button></td>
+        </tr>  
+    </table>
       <br />
 
       
@@ -56,23 +57,19 @@
       </div>
       
       <div>
-        <button>Mark As Complete</button>
+        <button class="complete">Mark As Complete</button>
       </div>
       <div>
-        <table>
+        <table class="directional">
   <tr>
     <td>
-      <button>
-        <svg aria-hidden="true" viewBox="0 0 100 100" height="50" width="80">
-          <path d="M0 50 L90 80 L90 20 Z" fill="blue" />
-        </svg>
+      <button class = "Larrow">
+         
       </button>
     </td>
     <td>
-      <button>
-        <svg aria-hidden="true" viewBox="0 0 100 100" height="50" width="80">
-          <path d="M90 50 L0 80 L0 20 Z" fill="red" />
-        </svg>
+      <button class = "Rarrow">
+         
       </button>
     </td>
   </tr>
