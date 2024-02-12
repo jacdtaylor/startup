@@ -44,7 +44,7 @@ header {
     z-index: 1;
     top: 100%; /* Position dropdown below button */
     right: 0; /* Align dropdown to the right */
-    background-image: linear-gradient(to bottom right, rgba(255,0,0,0.5), transparent); /* Red gradient from top left to bottom right */
+    text-align: right;
 
   }
 
@@ -59,6 +59,7 @@ header {
   
   .dropdown-content a:hover {
     background-color: #444;
+    color:#ff6d6d;
   }
   
   .dropdown:hover .dropdown-content {
@@ -100,52 +101,37 @@ header {
       
     
 
-    .Larrow {
-        width:50px;
-        height:25px;
-        background: linear-gradient(
-                    155deg,
-                    transparent 25px,
-                    #cfcfcf 25px,
-                    #ffffff 100%
-                )
-                top right,
-            linear-gradient(
-                    25deg,
-                    transparent 25px,
-                    #cfcfcf 25px,
-                    #ffffff 100%
-                )
-                bottom right;
-        background-size: 100% 75%;
-        background-repeat: no-repeat;
-        background-position: right 11px top -4.8px, right 11px bottom -4.8px;
-        text-align: right;
-    }
+.prev {
+  width: 100px;
+  height: 25px;
+  background-color: rgb(73, 73, 73);
+  font-size: 16px;
+  color: #f1f1f1;
 
+}
 
-    .Rarrow {
-        width:50px;
-        height:25px;
-        background: linear-gradient(
-                    -155deg,
-                    transparent 25px,
-                     #cfcfcf 25px,
-                     #ffffff 100%
-                )
-                top left,
-            linear-gradient(
-                    -25deg,
-                    transparent 25px,
-                    #cfcfcf 25px,
-                    #ffffff 100%
-                )
-                bottom left;
-        background-size: 100% 75%;
-        background-repeat: no-repeat;
-        background-position: right -12px top -4.8px, right -12px bottom -4.8px;
-        text-align: left;
-    }
+.prev:hover {
+  color:#ff6d6d;
+  background-color: rgb(46, 46, 46);
+  cursor: pointer;
+
+}
+
+.next {
+  width: 100px;
+  height: 25px;
+  background-color: rgb(73, 73, 73);
+  font-size: 16px;
+  color: #f1f1f1;
+
+}
+
+.next:hover {
+  color:#ff6d6d;
+  background-color: rgb(46, 46, 46);
+  cursor: pointer;
+
+}
 
     .mainbutton {
         width: 75px;
@@ -163,6 +149,12 @@ header {
         
     }
 
+    .mainbutton:hover {
+      color:#ff6d6d;
+      background-color: rgb(46, 46, 46);
+      cursor: pointer;
+
+    }
 
 
     .task-container {
@@ -193,4 +185,26 @@ header {
         background-color: rgb(73, 73, 73);
         font-size: 16px;
         color: #f1f1f1;
+    }
+
+    .complete:hover {
+      color:#ff6d6d;
+      background-color: rgb(46, 46, 46);
+      cursor: pointer;
+
+    }
+
+    .remove {
+      width: 175px;
+        height: 50px;
+        background-color: rgb(73, 73, 73);
+        font-size: 16px;
+        color: #f1f1f1;
+    }
+
+    .remove:hover {
+      color:#ff6d6d;
+      background-color: rgb(46, 46, 46);
+      cursor: pointer;
+
     }
