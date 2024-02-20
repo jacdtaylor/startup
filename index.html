@@ -9,17 +9,19 @@
     <link rel="stylesheet" href="login.css">
 
   </head>
+
+
+  <script src="login.js"></script>
+
   <body>
     <!-- Use header, main, and footer elements to give semantic structure -->
     
 
     <main>
       <h1>Welcome</h1>
-      <form method="get" action="manager.html">
         <label for="name"></label>
         <input type="text" id="name" placeholder="Your name here" />
-        <button type="submit">Login</button>
-      </form>
+        <button class="btn btn-primary" onclick="login()">Login</button>
     </main>
 
     <footer>
