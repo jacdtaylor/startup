@@ -84,13 +84,18 @@ document.addEventListener("DOMContentLoaded", function() {
       if (currentIndex > 0) {
         currentIndex--;
         renderTasks();
-      }
+      } else {
+        currentIndex = tasks.length - 1 }
+        renderTasks()
     });
   
     nextButton.addEventListener('click', function() {
       if (currentIndex < tasks.length - 1) {
         currentIndex++;
         renderTasks();
+      } else {
+        currentIndex = 0;
+        renderTasks()
       }
       
     });
