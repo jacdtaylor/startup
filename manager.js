@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
             renderTasks();
         }
       } else {
-        alert('Please enter task title and date.');
+        alert('Please enter task title.');
       }
     });
   

@@ -56,3 +56,13 @@ This is how each technology will be used:
 [x] - done - 20% Application elements. Buttons are using bootstrap
 [x] - done - 10% Application text content. Text is displayed.
 [x] - done - 10% Application images.
+
+
+## JavaScript deliverable
+
+For this deliverable I implemented by JavaScript so that the application works for a single user. I also added placeholders for future technology.
+
+- **login** - When you press enter or the login button it takes you to the manager page.
+- **database** - Displayed the task information. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
+- **WebSocket** - I have a location where shared tasks will be stored and viewed. This will be later replaced with Websocked Data.
+- **application logic** - Editing, deleting, creating and marking tasks as complete all have been implemented. Users also can go through tasks.
