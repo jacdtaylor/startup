@@ -190,6 +190,50 @@ header {
   cursor: pointer;
 }
 
+.create-task-button {
+  margin-left:auto;
+  margin-right:auto;
+  background-color: rgb(73, 73, 73);
+  font-size: 16px;
+  color: #f1f1f1;
+}
+.create-task-button:hover {
+  color:#ff6d6d;
+  background-color: rgb(46, 46, 46);
+  cursor: pointer;
+}
+
+
+.text-input {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(73, 73, 73);
+  color: #f1f1f1;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.text-input:focus {
+  outline: none;
+}
+
+/* Styling for date input */
+.date-input {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(73, 73, 73);
+  color: #f1f1f1;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.date-input:focus {
+  outline: none;
+}
 
 
     .task-container {
