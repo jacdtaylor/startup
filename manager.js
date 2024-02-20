@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <p class="task-date">${currentTask.date}</p>
           <button class="delete-task-button">Delete</button>
           <button class="edit-task-button">Edit</button>
+          <button class="complete-task-button">Mark As Complete</button>
         `;
       } else {
         taskContainer.innerHTML = '<p>No tasks available</p>';
@@ -85,6 +86,10 @@ document.addEventListener("DOMContentLoaded", function() {
           if (taskTitle !== null && taskDate !== null) {
             currentTask.title = taskTitle;
             currentTask.date = taskDate;
-            renderTasks();}}})
-  });
+            renderTasks();
+          }} else if (event.target.classList.contains('complete-task-button')) {
+            
+
+          }}
+  );
   
