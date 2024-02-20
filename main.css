@@ -133,28 +133,63 @@ header {
 
 }
 
-    .mainbutton {
-        width: 75px;
-        height: 50px;
-        background-color: rgb(73, 73, 73);
-        font-size: 16px;
-        color: #f1f1f1;
+.RevealOptions {
+  margin-left:auto;
+  margin-right:auto;
+  background-color: rgb(73, 73, 73);
+  font-size: 16px;
+  color: #f1f1f1;
+}
 
-        
-    }
+.RevealOptions:hover {
+  color:#ff6d6d;
+  background-color: rgb(46, 46, 46);
+  cursor: pointer;
+}
 
-    .TableButtons {
-        margin-left: auto;
-        margin-right: auto;
-        
-    }
+.delete-task-button {
+  margin-left:auto;
+  margin-right:auto;
+  background-color: rgb(73, 73, 73);
+  font-size: 16px;
+  color: #f1f1f1;
+}
+.delete-task-button:hover {
+  color:#ff6d6d;
+  background-color: rgb(46, 46, 46);
+  cursor: pointer;
+}
 
-    .mainbutton:hover {
-      color:#ff6d6d;
-      background-color: rgb(46, 46, 46);
-      cursor: pointer;
 
-    }
+.edit-task-button {
+  margin-left:auto;
+  margin-right:auto;
+  background-color: rgb(73, 73, 73);
+  font-size: 16px;
+  color: #f1f1f1;
+}
+.edit-task-button:hover {
+  color:#ff6d6d;
+  background-color: rgb(46, 46, 46);
+  cursor: pointer;
+}
+
+
+
+
+.complete-task-button {
+  margin-left:auto;
+  margin-right:auto;
+  background-color: rgb(73, 73, 73);
+  font-size: 16px;
+  color: #f1f1f1;
+}
+.complete-task-button:hover {
+  color:#ff6d6d;
+  background-color: rgb(46, 46, 46);
+  cursor: pointer;
+}
+
 
 
     .task-container {
