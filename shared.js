@@ -1,3 +1,9 @@
+
+
+
+
+
+
 const playerNameEl = document.querySelector('.player-name');
 playerNameEl.textContent = getPlayerName();
 
@@ -53,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <h2 class="task-title">${currentTask.title}</h2>
           <p class="task-date">${currentTask.date}</p>
           <p class="completion-status">${currentTask.completion}</p>
+          <p class="owner">Owner: ${currentTask.owner}</p>
           <button class="delete-task-button">Remove</button>
           <button class="edit-task-button">Edit</button>
           <button class="complete-task-button">Mark as ${currentTask.completion_task}</button>
@@ -117,7 +124,13 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             renderTasks();
           } else if (event.target.classList.contains('Simulate-Shared-Tasks')) {
-
+            createTask("Do the Dishes", "6/18/2023");
+            tasks[0].owner = "Jess";
+            createTask("Write Grandma", "12/20/2023");
+            tasks[1].owner = "Mom";
+            createTask("Buy BBQ Meat", "7/3/2024");
+            tasks[2].owner = "Donald";
+            renderTasks();
           }
         }
   );
