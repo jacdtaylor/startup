@@ -53,10 +53,8 @@ document.addEventListener("DOMContentLoaded", function() {
           <h2 class="task-title">${currentTask.title}</h2>
           <p class="task-date">${currentTask.date}</p>
           <p class="completion-status">${currentTask.completion}</p>
-          <button class="delete-task-button">Delete</button>
+          <button class="delete-task-button">Remove</button>
           <button class="edit-task-button">Edit</button>
-          <button class="share-task-button">Share</button>
-
           <button class="complete-task-button">Mark as ${currentTask.completion_task}</button>
         `;
       } else {
@@ -65,24 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   
     // Event listener for create task button
-    createTaskButton.addEventListener('click', function() {
 
-        var now = new Date();
-        var datetime = now.toLocaleString();
-      const title = taskTitleInput.value;
-      const date = datetime;
-      if (title && date) {
-        createTask(title, date);
-        taskTitleInput.value = '';
-        ReturnVisibility();
-        if (currentIndex == -1) {
-            currentIndex = 0;
-            renderTasks();
-        }
-      } else {
-        alert('Please enter task title and date.');
-      }
-    });
   
     // Navigation buttons
     const prevButton = document.querySelector('.prev');
@@ -111,11 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     taskContainer.addEventListener('click', function(event) {
-        if (event.target.classList.contains('delete-task-button')) {
-          tasks.splice(currentIndex, 1); // Remove the current task
-          currentIndex = Math.min(currentIndex, tasks.length - 1); // Adjust currentIndex if necessary
-          renderTasks();
-        } else if (event.target.classList.contains('edit-task-button')) {
+        if (event.target.classList.contains('edit-task-button')) {
           const currentTask = tasks[currentIndex];
           const taskTitle = prompt('Enter new task title:', currentTask.title);
           const taskDate = prompt('Enter new task date:', currentTask.date);
@@ -139,6 +116,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 currentTask.completion = "Incomplete"
             }
             renderTasks();
-          }}
+          } else if (event.target.classList.contains('Simulate-Shared-Tasks')) {
+
+          }
+        }
   );
         })
