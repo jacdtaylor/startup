@@ -43,7 +43,8 @@
 
       
 
-      <div class="task-container">
+      <div class="task-container" id="task-container">
+
         <h2 class="task-title">Your Task Title</h2>
         <p class="task-date">Date Created</p>
       </div>
@@ -54,7 +55,10 @@
 
       <table class = "TableButtons">
         <tr>
-          <td><button class="mainbutton">Create Task</button></td>
+          <td>
+            <input type="text" id="task-title" placeholder="Task Title">
+            <input type="date" id="task-date">
+            <button class="create-task-button">Create Task</button></td>
           <td><button class="mainbutton">Edit Task</button></td>
         </tr>
         <tr>
