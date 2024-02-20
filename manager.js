@@ -5,6 +5,20 @@ function getPlayerName() {
   return localStorage.getItem('userName') ?? 'guest';
 }
 
+function InputVisibility() {
+    var T = document.getElementById("InputFields");
+    var V = document.getElementById("RevealOptions")
+    T.style.display = "block";
+    V.style.display = "none"
+      // <-- Set it to block
+}
+
+function ReturnVisibility() {
+    var V = document.getElementById("InputFields");
+    var T = document.getElementById("RevealOptions")
+    T.style.display = "block";
+    V.style.display = "none"
+}
 
 document.addEventListener("DOMContentLoaded", function() {
     const tasks = []; // Array to store tasks
@@ -51,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
         createTask(title, date);
         taskTitleInput.value = '';
         taskDateInput.value = '';
+        ReturnVisibility();
       } else {
         alert('Please enter task title and date.');
       }
