@@ -677,7 +677,7 @@ Example:
   grid-auto-rows: 300px;
   grid-gap: 1em;
 }
-
+```
 
 # CS 260 - Web Programming
 
@@ -697,10 +697,11 @@ CSS frameworks provide commonly used functions and components in web application
 - Bootstrap components can be easily integrated into projects by linking to Bootstrap's CSS and JavaScript files via CDN.
 - Usage example: Bootstrap buttons provide pre-styled, visually appealing buttons with a single CSS class.
 
-```html
+html
+```
 <!-- Bootstrap button example -->
 <button type="button" class="btn btn-primary">Bootstrap</button>
-
+```
 # JavaScript for Web Development
 
 ## Introduction
