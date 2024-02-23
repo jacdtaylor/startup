@@ -570,7 +570,7 @@ You can define custom fonts using `@font-face`, specifying font names and source
 @font-face {
   font-family: 'Quicksand';
   src: url('https://cs260.click/fonts/quicksand.ttf');
-}```
+}
 
 p {
   font-family: Quicksand;
@@ -581,31 +581,31 @@ p {
 p {
   font-family: 'Rubik Microbe';
 }
-
+```
 # CSS Animation
 
 CSS animations bring interactivity and dynamism to web applications. They are created using animation properties and keyframes to define the element's appearance at different stages of the animation. Let's outline the process with an example:
 
 1. **Initial Setup**:
-    '''css
+    css
     p {
       text-align: center;
       font-size: 20vh;
     }
-    '''
+    
 
 2. **Animation Properties**:
-    '''css
+    css
     p {
       text-align: center;
       font-size: 20vh;
       animation-name: demo;
       animation-duration: 3s;
     }
-    '''
+    
 
 3. **Defining Keyframes**:
-    '''css
+    css
     @keyframes demo {
       from {
         font-size: 0vh;
@@ -617,7 +617,7 @@ CSS animations bring interactivity and dynamism to web applications. They are cr
         font-size: 20vh;
       }
     }
-    '''
+    
 
 4. **Final Result**:
     - The paragraph text zooms in until it's 20% of the view height.
