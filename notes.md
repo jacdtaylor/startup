@@ -749,7 +749,90 @@ JavaScript is a powerful language essential for modern web development. By maste
 |Link|Fiber,Hardware|Physical Connections|
 
 ## Web Servers
+- Microservices provide single functional purpose
+- serverless functionality removed the surver from the architecture and a function speaks HTTP
 
+## Domain Names
+- \[subdomain.\]\*\[secondary.top\] <\- Root
+- whois console utility retrieves information about domain name
+
+## Web services
+- Functionality provided by web service represents backend of application
+
+## URL
+- <scheme>://<domain name>:<port>/<path>?<parameters>#<anchor>
+| Part          | Example                      | Meaning                                                                                                                                                                                                                                                                                     |
+|---------------|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Scheme        | https                        | The protocol required to ask for the resource. For web applications, this is usually HTTPS. But it could be any internet protocol such as FTP or MAILTO.                                                                                                                                |
+| Domain name   | byu.edu                      | The domain name that owns the resource represented by the URL.                                                                                                                                                                                                                              |
+| Port          | 3000                         | The port specifies the numbered network port used to connect to the domain server. Lower number ports are reserved for common internet protocols, higher number ports can be used for any purpose. The default port is 80 if the scheme is HTTP, or 443 if the scheme is HTTPS. |
+| Path          | /school/byu/user/8014       | The path to the resource on the domain. The resource does not have to physically be located on the file system with this path. It can be a logical path representing endpoint parameters, a database table, or an object schema.                                                           |
+| Parameters    | filter=names&highlight=intro,summary | The parameters represent a list of key value pairs. Usually it provides additional qualifiers on the resource represented by the path. This might be a filter on the returned resource or how to highlight the resource. The parameters are also sometimes called the query string. |
+| Anchor        | summary                      | The anchor usually represents a sub-location in the resource. For HTML pages this represents a request for the browser to automatically scroll to the element with an ID that matches the anchor. The anchor is also sometimes called the hash, or fragment ID.                     |
+- URN (uniform resource name) 
+
+## Ports
+- Ports from 0 to 1023 represent standard protocols. Generally a web service should avoid these ports unless it is providing the protocol represented by the standard. Ports from 1024 to 49151 represent ports that have been assigned to requesting entities. However, it is very common for these ports to be used by services running internally on a device. Ports from 49152 to 65535 are considered dynamic and are used to create dynamic connections to a device
+
+## Important Concepts in HTTP
+
+### HTTP Request and Response Basics:
+- HTTP requests contain a method, URL, headers, and optionally a body.
+- Responses include a status code, headers, and sometimes a body.
+
+### Common HTTP Verbs:
+- **GET**: Retrieves data.
+- **POST**: Creates new resources.
+- **PUT**: Updates existing resources.
+- **DELETE**: Removes resources.
+- **OPTIONS**: Retrieves metadata.
+
+### HTTP Status Codes:
+- Status codes indicate the outcome of a request.
+- Common status codes include 200 (Success), 404 (Not Found), 500 (Internal Server Error), etc.
+
+### HTTP Headers:
+- Headers carry additional information about requests and responses.
+- They cover aspects like content type, caching, authentication, etc.
+
+### Cookies:
+- Cookies enable state management in stateless HTTP protocol.
+- They allow servers to track user sessions and preferences.
+
+### HTTP Versions:
+- HTTP/1.0, HTTP/1.1, HTTP/2, HTTP/3.
+- Each version introduces improvements in performance, security, and functionality.
+
+These concepts are fundamental for building robust and efficient web applications, governing communication between clients and servers on the web.
+
+## Fetch
+- Preferred way to make HTTP requests
+```
+const url = "https://randomuser.me/api/";
+fetch(url)
+  .then((x) => x.json())
+  .then((response) => {
+    document.querySelector("pre").textContent = JSON.stringify(
+      response,
+      null,
+      "  "
+    );
+  });
+
+```
+
+
+## NodeJS
+
+```
+1 Create your project directory
+2 Initialize it for use with NPM by running npm init -y
+3 Make sure .gitignore file contains node_modules
+4 Install any desired packages with npm install <package name here>
+5 Add require('<package name here>') to your application's JavaScript
+6 Use the code the package provides in your JavaScript
+7 Run your code with node index.js
+```
 
 ## My Website
 
