@@ -738,7 +738,17 @@ JavaScript is a versatile programming language primarily used for web developmen
 
 JavaScript is a powerful language essential for modern web development. By mastering its fundamentals and exploring advanced topics, developers can create interactive, responsive, and feature-rich web applications.
 
+## The internet
+- dig console utility will pull IP address for any domain
+- traceroute will show hops in a connection
+|Layer|Example|Purpose|
+|:---------:|:------------:|:------------------------------:|
+|Application|HTTPS|Functionality like web browser|
+|Transport|TCP|Moving connection information packets|
+|Internet|IP|Establishing connections|
+|Link|Fiber,Hardware|Physical Connections|
 
+## Web Servers
 
 
 ## My Website
