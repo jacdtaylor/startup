@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const createTaskButton = document.querySelector('.create-task-button');
   
     // Function to create a new task
-    function createTask(title, date) {
+    async function createTask(title, date) {
       const task = {
         title: title,
         date: date,
@@ -39,30 +39,47 @@ document.addEventListener("DOMContentLoaded", function() {
         opacity: 1,
         owner: getPlayerName()
       };
-      tasks.push(task);
-      renderTasks();
-    }
-  
-    // Function to render tasks
-    function renderTasks() {
-      const currentTask = tasks[currentIndex];
-      if (currentTask) {
-        const container = document.getElementById("task-container");
-        container.style.opacity = currentTask.opacity;
-        taskContainer.innerHTML = `
-          <h2 class="task-title">${currentTask.title}</h2>
-          <p class="task-date">${currentTask.date}</p>
-          <p class="completion-status">${currentTask.completion}</p>
-          <button class="delete-task-button">Delete</button>
-          <button class="edit-task-button">Edit</button>
-          <button class="share-task-button">Share</button>
-
-          <button class="complete-task-button">Mark as ${currentTask.completion_task}</button>
-        `;
-      } else {
-        taskContainer.innerHTML = `<p>No tasks available</p>`;
+    
+      try {
+        const response = await fetch('/api/tasks', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(task)
+        });
+        renderTasks(); // This line should be inside the try block
+      } catch (error) {
+        console.error('Error creating task:', error);
+        // Handle error here
       }
     }
+        
+  
+    // Function to render tasks
+    async function renderTasks() {
+      try {
+          const response = await fetch('/api/scores');
+          const scores = await response.json();
+          const currentTask = tasks[currentIndex];
+          if (currentTask) {
+              const container = document.getElementById("task-container");
+              container.style.opacity = currentTask.opacity;
+              container.innerHTML = `
+                  <h2 class="task-title">${currentTask.title}</h2>
+                  <p class="task-date">${currentTask.date}</p>
+                  <p class="completion-status">${currentTask.completion}</p>
+                  <button class="delete-task-button">Delete</button>
+                  <button class="edit-task-button">Edit</button>
+                  <button class="share-task-button">Share</button>
+                  <button class="complete-task-button">Mark as ${currentTask.completion_task}</button>
+              `;
+          } else {
+              document.getElementById("task-container").innerHTML = `<p>No tasks available</p>`;
+          }
+      } catch (error) {
+          console.error('Error rendering tasks:', error);
+          // Handle error here
+      }
+  }
   
     // Event listener for create task button
     createTaskButton.addEventListener('click', function() {
