@@ -31,6 +31,16 @@ apiRouter.delete('/tasks/:index', (req, res) => {
     if (index >= 0 && index < tasks.length) {
       tasks.splice(index, 1);
     }});
+
+apiRouter.put('/tasks/:index', (req, res) => {
+  const index = req.params.index;
+  if (index >= 0 && index < tasks.length) {
+      tasks[index] = req.body; // Replace the task at the specified index with the updated task
+      res.send(tasks);
+  } else {
+      res.status(404).send("Task not found");
+  }
+});
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });

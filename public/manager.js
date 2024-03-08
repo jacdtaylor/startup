@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (event.target.classList.contains('delete-task-button')) {
           try {
               const response = await fetch('/api/tasks', {
-                  method: 'POST',
+                  method: 'DELETE',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify(task)
               });
@@ -163,6 +163,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 currentTask.completion_task ="Complete"
                 currentTask.completion = "Incomplete"
             }
+            fetch(`/api/tasks/${index}`, {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(currentTask)
+          })
             renderTasks();
           }}
   );
