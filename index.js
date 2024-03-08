@@ -23,7 +23,7 @@ apiRouter.get('/tasks', (_req, res) => {
 apiRouter.post('/tasks', (req, res) => {
     const newTask = req.body;
     tasks.push(newTask)
-    res.send(scores);
+    res.send(tasks);
 });
 
 
