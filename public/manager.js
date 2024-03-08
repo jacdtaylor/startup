@@ -147,7 +147,15 @@ document.addEventListener("DOMContentLoaded", function() {
           if (taskTitle !== null && taskDate !== null) {
             currentTask.title = taskTitle;
             currentTask.date = taskDate;
+            fetch(`/api/tasks/${index}`, {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(currentTask)
+          })
             renderTasks();
+          
           }} else if (event.target.classList.contains('complete-task-button')) {
             const currentTask = tasks[currentIndex];
             currentTask.completion_value *= -1;
