@@ -23,7 +23,6 @@ apiRouter.get('/tasks', (_req, res) => {
 apiRouter.post('/tasks', (req, res) => {
     const newTask = req.body;
     tasks.push(newTask)
-    res.send(tasks);
 });
 
 
@@ -37,7 +36,6 @@ apiRouter.put('/tasks/:index', (req, res) => {
   const index = req.params.index;
   if (index >= 0 && index < tasks.length) {
       tasks[index] = req.body; // Replace the task at the specified index with the updated task
-      res.send(tasks);
   } else {
       res.status(404).send("Task not found");
   }
