@@ -21,8 +21,7 @@ function ReturnVisibility() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    const tasks = []; // Array to store tasks
-  
+    let currentIndex = 0;
     const taskContainer = document.getElementById('task-container');
     const taskTitleInput = document.getElementById('task-title');
     const taskDateInput = document.getElementById('task-date');
@@ -57,8 +56,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to render tasks
     async function renderTasks() {
       try {
-          const response = await fetch('/api/scores');
-          const scores = await response.json();
+          const response = await fetch('/api/tasks');
+          const tasks = await response.json();
           const currentTask = tasks[currentIndex];
           if (currentTask) {
               const container = document.getElementById("task-container");
@@ -104,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Navigation buttons
     const prevButton = document.querySelector('.prev');
     const nextButton = document.querySelector('.next');
-    let currentIndex = 0;
+    
   
     prevButton.addEventListener('click', function() {
       if (currentIndex > 0) {
@@ -147,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
           if (taskTitle !== null && taskDate !== null) {
             currentTask.title = taskTitle;
             currentTask.date = taskDate;
-            fetch(`/api/tasks/${index}`, {
+            fetch(`/api/tasks/${currentIndex}`, {
               method: 'PUT',
               headers: {
                   'Content-Type': 'application/json'
@@ -171,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 currentTask.completion_task ="Complete"
                 currentTask.completion = "Incomplete"
             }
-            fetch(`/api/tasks/${index}`, {
+            fetch(`/api/tasks/${currentIndex}`, {
               method: 'PUT',
               headers: {
                   'Content-Type': 'application/json'
