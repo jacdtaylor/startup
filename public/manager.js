@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(task)
         });
-        renderTasks(); // This line should be inside the try block
+        renderTasks(); 
       } catch (error) {
         console.error('Error creating task:', error);
         // Handle error here
@@ -127,11 +127,19 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
-    taskContainer.addEventListener('click', function(event) {
-        if (event.target.classList.contains('delete-task-button')) {
-          tasks.splice(currentIndex, 1); // Remove the current task
-          currentIndex = Math.min(currentIndex, tasks.length - 1); // Adjust currentIndex if necessary
-          renderTasks();
+    taskContainer.addEventListener('click', async function(event) {
+      if (event.target.classList.contains('delete-task-button')) {
+          try {
+              const response = await fetch('/api/tasks', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(task)
+              });
+              currentIndex = Math.min(currentIndex, tasks.length - 1); // Adjust currentIndex if necessary
+              renderTasks();
+          } catch (error) {
+              console.error('Error deleting task:', error);
+          }
         } else if (event.target.classList.contains('edit-task-button')) {
           const currentTask = tasks[currentIndex];
           const taskTitle = prompt('Enter new task title:', currentTask.title);
