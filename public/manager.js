@@ -75,7 +75,11 @@ document.addEventListener("DOMContentLoaded", function() {
               document.getElementById("task-container").innerHTML = `<p>No tasks available</p>`;
           }
       } catch (error) {
-          console.error('Error rendering tasks:', error);
+        const container = document.getElementById("task-container");
+        container.innerHTML = `
+        <h2>There is an Error Stupid</h2>
+        <p>${error}</p>
+        `
           // Handle error here
       }
   }
