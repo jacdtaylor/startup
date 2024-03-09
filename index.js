@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+// Define tasks array before setting up routes
+let tasks = [];
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -22,7 +24,8 @@ apiRouter.get('/tasks', (_req, res) => {
 // Add Task
 apiRouter.post('/tasks', (req, res) => {
     const newTask = req.body;
-    tasks.push(newTask)
+    tasks.push(newTask);
+    res.send(tasks);
 });
 
 
@@ -30,12 +33,17 @@ apiRouter.delete('/tasks/:index', (req, res) => {
     const index = req.params.index;
     if (index >= 0 && index < tasks.length) {
       tasks.splice(index, 1);
-    }});
+      res.send(tasks);
+    } else {
+      res.status(404).send("Task not found");
+    }
+});
 
 apiRouter.put('/tasks/:index', (req, res) => {
   const index = req.params.index;
   if (index >= 0 && index < tasks.length) {
       tasks[index] = req.body; // Replace the task at the specified index with the updated task
+      res.send(tasks[index]);
   } else {
       res.status(404).send("Task not found");
   }

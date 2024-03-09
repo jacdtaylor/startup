@@ -21,6 +21,7 @@ function ReturnVisibility() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    let tasks = []
     let currentIndex = 0;
     const taskContainer = document.getElementById('task-container');
     const taskTitleInput = document.getElementById('task-title');
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
     // Function to create a new task
     async function createTask(title, date) {
-      const task = {
+      const newTask = {
         title: title,
         date: date,
         completion_value: -1,
@@ -43,21 +44,39 @@ document.addEventListener("DOMContentLoaded", function() {
         const response = await fetch('/api/tasks', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(task)
+          body: JSON.stringify(newTask)
         });
-        renderTasks(); 
+        loadTasks(); 
       } catch (error) {
-        console.error('Error creating task:', error);
+        const container = document.getElementById("task-container")
+        container.innerHTML = `
+        <h2>Create Error</h2>
+        <p>${error}</p>
+        
+        `
         // Handle error here
       }
     }
-        
+    async function loadTasks() {
+      try {
+        const response = await fetch("/api/tasks");
+        const tasks = await response.json();
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+      }  catch {
+        const container = document.getElementById("task-container")
+        container.innerHTML = `
+        <h2>load Error</h2>
+        <p>${error}</p> `
+        const taskText = localStorage.getItem('tasks');
+        if (taskText) {
+          tasks = JSON.parse(taskText);
+        }
+        renderTasks();
+    }}
   
     // Function to render tasks
     async function renderTasks() {
       try {
-          const response = await fetch('/api/tasks');
-          const tasks = await response.json();
           const currentTask = tasks[currentIndex];
           if (currentTask) {
               const container = document.getElementById("task-container");
@@ -75,21 +94,18 @@ document.addEventListener("DOMContentLoaded", function() {
               document.getElementById("task-container").innerHTML = `<p>No tasks available</p>`;
           }
       } catch (error) {
-
-        const container = document.getElementById("task-container");
+        const container = document.getElementById("task-container")
         container.innerHTML = `
-        <h2>There is an Error Stupid</h2>
-        <p>${error}</p>
-        `
+        <h2>render Error</h2>
+        <p>${error}</p> `
           // Handle error here
       }
   }
   
     // Event listener for create task button
     createTaskButton.addEventListener('click', function() {
-
-        var now = new Date();
-        var datetime = now.toLocaleString();
+      var now = new Date();
+      var datetime = now.toLocaleString();
       const title = taskTitleInput.value;
       const date = datetime;
       if (title && date) {
@@ -98,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
         ReturnVisibility();
         if (currentIndex == -1) {
             currentIndex = 0;
-            renderTasks();
+            loadTasks();
         }
       } else {
         alert('Please enter task title.');
@@ -140,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   body: JSON.stringify(task)
               });
               currentIndex = Math.min(currentIndex, tasks.length - 1); // Adjust currentIndex if necessary
-              renderTasks();
+              loadTasks();
           } catch (error) {
               console.error('Error deleting task:', error);
           }
@@ -158,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function() {
               },
               body: JSON.stringify(currentTask)
           })
-            renderTasks();
+            loadTasks();
           
           }} else if (event.target.classList.contains('complete-task-button')) {
             const currentTask = tasks[currentIndex];
@@ -182,7 +198,8 @@ document.addEventListener("DOMContentLoaded", function() {
               },
               body: JSON.stringify(currentTask)
           })
-            renderTasks();
+            loadTasks();
           }}
   );
-        })
+  loadTasks();
+})
