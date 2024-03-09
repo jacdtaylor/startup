@@ -39,7 +39,16 @@ document.addEventListener("DOMContentLoaded", function() {
         opacity: 1,
         owner: getPlayerName()
       };
-    
+      const container = document.getElementById("task-container")
+      container.innerHTML = `
+      <h2 class="task-title">${newTask.title}</h2>
+                  <p class="task-date">${newTask.date}</p>
+                  <p class="completion-status">${newTask.completion}</p>
+                  <button class="delete-task-button">Delete</button>
+                  <button class="edit-task-button">Edit</button>
+                  <button class="share-task-button">Share</button>
+                  <button class="complete-task-button">Mark as ${newTask.completion_task}</button>
+              `
       try {
         const response = await fetch('/api/tasks', {
           method: 'POST',
