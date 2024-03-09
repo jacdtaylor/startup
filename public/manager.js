@@ -21,7 +21,7 @@ function ReturnVisibility() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    let tasks = []
+    let tasks = [];
     let currentIndex = 0;
     const taskContainer = document.getElementById('task-container');
     const taskTitleInput = document.getElementById('task-title');
@@ -39,16 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
         opacity: 1,
         owner: getPlayerName()
       };
-      const container = document.getElementById("task-container")
-      container.innerHTML = `
-      <h2 class="task-title">${newTask.title}</h2>
-                  <p class="task-date">${newTask.date}</p>
-                  <p class="completion-status">${newTask.completion}</p>
-                  <button class="delete-task-button">Delete</button>
-                  <button class="edit-task-button">Edit</button>
-                  <button class="share-task-button">Share</button>
-                  <button class="complete-task-button">Mark as ${newTask.completion_task}</button>
-              `
+      
       try {
         const response = await fetch('/api/tasks', {
           method: 'POST',
@@ -69,8 +60,9 @@ document.addEventListener("DOMContentLoaded", function() {
     async function loadTasks() {
       try {
         const response = await fetch("/api/tasks");
-        const tasks = await response.json();
+        tasks = await response.json();
         localStorage.setItem('tasks', JSON.stringify(tasks));
+        renderTasks(tasks);
       }  catch {
         const container = document.getElementById("task-container")
         container.innerHTML = `
@@ -80,11 +72,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (taskText) {
           tasks = JSON.parse(taskText);
         }
-        renderTasks();
-    }}
+        
+    }
+    
+  }
   
     // Function to render tasks
-    async function renderTasks() {
+    async function renderTasks(tasks) {
       try {
           const currentTask = tasks[currentIndex];
           if (currentTask) {
