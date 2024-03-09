@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 // Define tasks array before setting up routes
-let tasks = [];
+
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -23,8 +23,7 @@ apiRouter.get('/tasks', (_req, res) => {
 
 // Add Task
 apiRouter.post('/tasks', (req, res) => {
-    const newTask = req.body;
-    tasks.push(newTask);
+    addtask(req.body, tasks);
     res.send(tasks);
 });
 
@@ -56,3 +55,9 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+
+let tasks = []
+function addtask(newTask, tasks) {
+  tasks.push(newTask);
+}
