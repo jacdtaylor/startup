@@ -66,3 +66,11 @@ For this deliverable I implemented by JavaScript so that the application works f
 - **database** - Displayed the task information. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
 - **WebSocket** - I have a location where shared tasks will be stored and viewed. This will be later replaced with Websocked Data.
 - **application logic** - Editing, deleting, creating and marking tasks as complete all have been implemented. Users also can go through tasks.
+
+
+## simon-service
+- **Create an HTTP service using Node.js and Express** HTTP Service Set Up
+- **Frontend served up using Express static middleware** Express Middleware Used
+- **frontend calls third party service endpoints** Gets Random Quote When No Tasks
+- **Your backend provides service endpoints** Creates Service Endpoints
+- **frontend calls your service endpoints** Calls Endpoints to Get Tasks
