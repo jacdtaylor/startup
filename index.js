@@ -94,6 +94,17 @@ apiRouter.delete('/delete', (req, res) => {
   res.send(tasks)
 });
 
+apiRouter.post('/edit', (req, res) => {
+  const taskId = req.body.id;
+  const updatedTaskData = req.body;
+
+  // Find the index of the task with the given ID
+  const taskIndex = tasks.findIndex(task => task.id === taskId); 
+  tasks[taskIndex].title = updatedTaskData.title;
+  tasks[taskIndex].date = updatedTaskData.date;
+  res.send(tasks)});
+
+
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });

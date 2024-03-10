@@ -21,11 +21,14 @@ function ReturnVisibility() {
 
 document.addEventListener('DOMContentLoaded', function() {
   let tasks = [];
+  let idnum = 0
   const createTaskButton = document.querySelector('.create-task-button');
   let currentIndex = 0; // Initialize currentIndex
 
   async function createNewTask(title, date) {
+    
     const newTask = {
+              id:idnum,
               title: title,
               date: date,
               completion_value: -1,
@@ -34,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
               opacity: 1,
               owner: getPlayerName()
             };
-
+            idnum++;
     try {
       const response = await fetch('/api/task', {
         method: 'POST',
@@ -141,8 +144,33 @@ document.getElementById("task-container").addEventListener('click', async functi
       displayErrorMessage('Error deleting task: ' + error.message);
     }
   } else if (event.target.classList.contains('edit-task-button')) {
-    // Handle edit task button click
-    // Add your edit task functionality here
+          const taskTitle = prompt('Enter new task title:', tasks[currentIndex].title);
+          const taskDate = prompt('Enter new task date:', tasks[currentIndex].date);
+          if (taskTitle != null && taskDate != null) {
+            tasks[currentIndex].title = taskTitle;
+            tasks[currentIndex].date = taskDate;
+
+      try {
+        const response = await fetch(`/api/edit`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(tasks[currentIndex]),
+        });
+        if (response.ok) {
+          const tasks = await response.json();
+          // Handle the edited task data as needed
+        } else {
+          const errorMessage = await response.text();
+          // Handle error response
+        }
+      } catch (error) {
+        // Handle network or other errors
+        console.error('Error editing task:', error);
+      }
+      displayTasks(tasks, currentIndex);
+
+    }
+    
   }
 });
 
