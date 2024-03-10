@@ -171,8 +171,30 @@ document.getElementById("task-container").addEventListener('click', async functi
 
     }
     
-  }
-});
+  }else if (event.target.classList.contains('complete-task-button')) {
+                const currentTask = tasks[currentIndex];
+                currentTask.completion_value *= -1;
+                if (currentTask.completion_value == 1) {
+                    currentTask.opacity = 0.5
+                    currentTask.completion = "Completed"
+                    currentTask.completion_task ="Incomplete"
+                } else {
+                    currentTask.opacity = 1;
+                    currentTask.completion_task ="Complete"
+                    currentTask.completion = "Incomplete"
+                }
+                try {
+                    const response = await fetch(`/api/complete`, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(currentTask),
+                    });
+                    const tasks = await response.json();
+                    displayTasks(tasks, currentIndex)
+                } catch (error) {
+                  console.error('Error completing task:', error);
+                }
+}});
 
 // Function to display error message
 function displayErrorMessage(message) {

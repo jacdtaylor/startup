@@ -105,6 +105,16 @@ apiRouter.post('/edit', (req, res) => {
   res.send(tasks)});
 
 
+  apiRouter.post('/complete', (req, res) => {
+    const taskId = req.body.id;
+    const updatedTaskData = req.body;
+  
+    // Find the index of the task with the given ID
+    const taskIndex = tasks.findIndex(task => task.id === taskId); 
+    tasks[taskIndex] = updatedTaskData
+  
+    res.send(tasks)});
+
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
