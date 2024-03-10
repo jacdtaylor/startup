@@ -117,23 +117,41 @@ document.addEventListener('DOMContentLoaded', function() {
       displayTasks(tasks, currentIndex);
     }
   });
-  taskContainer.addEventListener('click', async function(event) {
-    if (event.target.classList.contains('delete-task-button')) {
-                try {
-                    const response = await fetch('/api/delete', {
-                        method: 'DELETE',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ index: currentIndex }),
-                    });
-                  
-                    const tasks = await response.JSON();
-                  }} else {
+ // Event listener for task-container (Event Delegation)
+document.getElementById("task-container").addEventListener('click', async function(event) {
+  if (event.target.classList.contains('delete-task-button')) {
+    const indexToDelete = currentIndex; // Store the current index to delete
+    try {
+      const response = await fetch('/api/delete', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ index: indexToDelete }),
+      });
+      if (response.ok) {
+        tasks.splice(indexToDelete, 1); // Remove the deleted task locally
+        if (currentIndex > 0) {
+          currentIndex--; // Decrement currentIndex if necessary
+        }
+        displayTasks(tasks, currentIndex);
+      } else {
+        const errorMessage = await response.text(); // Get error message from server
+        displayErrorMessage(errorMessage);
+      }
+    } catch (error) {
+      displayErrorMessage('Error deleting task: ' + error.message);
+    }
+  } else if (event.target.classList.contains('edit-task-button')) {
+    // Handle edit task button click
+    // Add your edit task functionality here
+  }
+});
 
-                  }
-                
-                });
-                    
-                   
+// Function to display error message
+function displayErrorMessage(message) {
+  const container = document.getElementById("task-container");
+  container.innerHTML = `<p>${message}</p>`;
+}
+
 
 
 

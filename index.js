@@ -90,7 +90,7 @@ apiRouter.post('/task', (req, res) => {
 });
 
 apiRouter.delete('/delete', (req, res) => {
-  tasks.splice(req, 1);
+  tasks.splice(req.body.index, 1);
   res.send(tasks)
 });
 
