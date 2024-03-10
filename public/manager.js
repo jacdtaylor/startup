@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   async function createNewTask(title, date) {
     const NewTask = {title: title, date: date};
+    
     try {
       const response = await fetch('/api/task', {
         method: 'POST',
@@ -35,18 +36,32 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (error) {
       console.error('Error creating new task:', error);
     }
+    displayTasks(tasks);
   }
 
-  async function displayTasks(tasks) {
-    
-  }
+  let currentTaskIndex = 0; // Keep track of the current task index
+
+async function displayTasks(tasks) {
+    const container = document.getElementById("task-container");
+    container.innerHTML = ""; // Clear the container before adding new task
+
+    if (tasks.length) {
+        // Display the current task
+        const task = tasks[currentTaskIndex];
+        container.innerHTML += `
+            <h2>${task.title}</h2>
+            <p>${task.date}</p>
+        `;}
+
+
 
 
   async function retrieveTask() {
+    
     try {
       // Get the latest high scores from the service
       const response = await fetch('/api/tasks');
-      tasks= await response.json();
+      tasks = await response.json();
   
       // Save the scores in case we go offline in the future
       localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -55,12 +70,34 @@ document.addEventListener('DOMContentLoaded', function() {
       const tasksText = localStorage.getItem('tasks');
       if (tasksText) {
         tasks = JSON.parse(tasksText);
-       }}
+      }
+    }
     displayTasks(tasks);
   }
+
+  createTaskButton.addEventListener('click', function() {
+          const taskTitleInput = document.getElementById('task-title');
+          var now = new Date();
+          var datetime = now.toLocaleString();
+          const title = taskTitleInput.value;
+          const date = datetime;
+          
+          if (title && date) {
+            createNewTask(title, date);
+            taskTitleInput.value = '';
+            ReturnVisibility();
+            if (currentIndex == -1) {
+                currentIndex = 0;
+                loadTasks();
+            }
+          } else {
+            alert('Please enter task title.');
+          }
+        });
+
+  // Call the function to retrieve tasks when the DOM is loaded
+  retrieveTask();
 });
-
-
 
 
 // document.addEventListener("DOMContentLoaded", function() {

@@ -62,9 +62,6 @@
 //   tasks.push(newTask);
 // }
 
-// api.js
-// api.js
-
 const express = require('express');
 const app = express();
 
@@ -79,16 +76,16 @@ app.use(express.static('public'));
 
 // Router for service endpoints
 var apiRouter = express.Router();
-app.use(`/api`, apiRouter);
+app.use('/api', apiRouter); // <-- Prefix API routes with '/api'
 
-// Gettasks
+// Get tasks
 apiRouter.get('/tasks', (_req, res) => {
   res.send(tasks);
 });
 
-// Submittask
+// Submit task
 apiRouter.post('/task', (req, res) => {
-  tasks = updatetasks(req.body, tasks);
+  tasks.push(req.body);
   res.send(tasks);
 });
 
@@ -101,26 +98,6 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-// updatetasks considers a new task for inclusion in the high tasks.
-// The high tasks are saved in memory and disappear whenever the service is restarted.
+// updateTasks considers a new task for inclusion in the tasks.
+// The tasks are saved in memory and disappear whenever the service is restarted.
 let tasks = [];
-function updatetasks(newtask, tasks) {
-  let found = false;
-  for (const [i, prevtask] of tasks.entries()) {
-    if (newtask.task > prevtask.task) {
-      tasks.splice(i, 0, newtask);
-      found = true;
-      break;
-    }
-  }
-
-  if (!found) {
-    tasks.push(newtask);
-  }
-
-  if (tasks.length > 10) {
-    tasks.length = 10;
-  }
-
-  return tasks;
-}
