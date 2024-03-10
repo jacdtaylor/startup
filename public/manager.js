@@ -39,24 +39,28 @@ document.addEventListener('DOMContentLoaded', function() {
     displayTasks(tasks);
   }
 
-  let currentTaskIndex = 0; // Keep track of the current task index
+// Keep track of the current task index
 
-async function displayTasks(tasks) {
+async function displayTasks(tasks, currentIndex) {
     const container = document.getElementById("task-container");
     container.innerHTML = ""; // Clear the container before adding new task
 
     if (tasks.length) {
         // Display the current task
-        const task = tasks[currentTaskIndex];
+        const task = tasks[currentIndex];
         container.innerHTML += `
             <h2>${task.title}</h2>
             <p>${task.date}</p>
-        `;}
+        `;
+
+    } else {
+        container.innerHTML = "<p>No tasks available</p>";
+    }
+}
 
 
 
-
-  async function retrieveTask() {
+  async function retrieveTask(currentIndex) {
     
     try {
       // Get the latest high scores from the service
@@ -72,7 +76,7 @@ async function displayTasks(tasks) {
         tasks = JSON.parse(tasksText);
       }
     }
-    displayTasks(tasks);
+    displayTasks(tasks, currentIndex);
   }
 
   createTaskButton.addEventListener('click', function() {
@@ -86,17 +90,40 @@ async function displayTasks(tasks) {
             createNewTask(title, date);
             taskTitleInput.value = '';
             ReturnVisibility();
-            if (currentIndex == -1) {
-                currentIndex = 0;
-                loadTasks();
-            }
           } else {
             alert('Please enter task title.');
           }
         });
 
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+            
+      prevButton.addEventListener('click', function() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderTasks(currentIndex);
+      } else if (tasks.length == 0 ) {
+        renderTasks(currentIndex)
+      } 
+      else {
+        currentIndex = tasks.length - 1 }
+        renderTasks(currentIndex)
+    });
+  
+    nextButton.addEventListener('click', function() {
+      if (currentIndex < tasks.length - 1) {
+        currentIndex++;
+        renderTasks(currentIndex);
+      } else {
+        currentIndex = 0;
+        renderTasks(currentIndex)
+      }
+      
+    });
+
   // Call the function to retrieve tasks when the DOM is loaded
-  retrieveTask();
+  let currentIndex = 0;
+  retrieveTask(currentIndex);
 });
 
 
