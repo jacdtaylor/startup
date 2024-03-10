@@ -19,6 +19,7 @@ function ReturnVisibility() {
   V.style.display = "none";
 }
 
+
 document.addEventListener('DOMContentLoaded', function() {
   let tasks = [];
   let idnum = 0
@@ -85,7 +86,13 @@ document.addEventListener('DOMContentLoaded', function() {
                   <button class="complete-task-button">Mark as ${task.completion_task}</button>
               `;
     } else {
-      container.innerHTML = "<p>No tasks available</p>";
+      fetch('https://api.quotable.io/random')
+    .then((response) => response.json())
+    .then((data) => {
+        
+
+      container.innerHTML = `<p>"${data.content}"</p>
+      <p>${data.author}</p>`;})
     }
   }
 
