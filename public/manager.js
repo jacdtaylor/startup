@@ -7,70 +7,55 @@ function getPlayerName() {
 
 function InputVisibility() {
   var T = document.getElementById("InputFields");
-  var V = document.getElementById("RevealOptions")
+  var V = document.getElementById("RevealOptions");
   T.style.display = "block";
-  V.style.display = "none"
+  V.style.display = "none";
 }
 
 function ReturnVisibility() {
   var V = document.getElementById("InputFields");
-  var T = document.getElementById("RevealOptions")
+  var T = document.getElementById("RevealOptions");
   T.style.display = "block";
-  V.style.display = "none"
+  V.style.display = "none";
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   let tasks = [];
-  createTaskButton = document.querySelector('.create-task-button');
+  const createTaskButton = document.querySelector('.create-task-button');
+  let currentIndex = 0; // Initialize currentIndex
 
   async function createNewTask(title, date) {
-    const NewTask = {title: title, date: date};
-    
+    const newTask = {
+              title: title,
+              date: date,
+              completion_value: -1,
+              completion: "Incomplete",
+              completion_task: "Complete",
+              opacity: 1,
+              owner: getPlayerName()
+            };
+
     try {
       const response = await fetch('/api/task', {
         method: 'POST',
-        headers: {'content-type': 'application/json'},
-        body: JSON.stringify(NewTask),
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(newTask),
       });
       const tasks = await response.json();
+       // Push the created task to the tasks array
     } catch (error) {
       console.error('Error creating new task:', error);
     }
-    displayTasks(tasks);
+    retrieveTasks(currentIndex);
   }
 
-// Keep track of the current task index
-
-async function displayTasks(tasks, currentIndex) {
-    const container = document.getElementById("task-container");
-    container.innerHTML = ""; // Clear the container before adding new task
-
-    if (tasks.length) {
-        // Display the current task
-        const task = tasks[currentIndex];
-        container.innerHTML += `
-            <h2>${task.title}</h2>
-            <p>${task.date}</p>
-        `;
-
-    } else {
-        container.innerHTML = "<p>No tasks available</p>";
-    }
-}
-
-
-
-  async function retrieveTask(currentIndex) {
-    
+  async function retrieveTasks(currentIndex) {
     try {
-      // Get the latest high scores from the service
       const response = await fetch('/api/tasks');
       tasks = await response.json();
-  
-      // Save the scores in case we go offline in the future
       localStorage.setItem('tasks', JSON.stringify(tasks));
-    } catch {
-      // If there was an error then just use the last saved scores
+    } catch (error) {
+      console.error('Error retrieving tasks:', error);
       const tasksText = localStorage.getItem('tasks');
       if (tasksText) {
         tasks = JSON.parse(tasksText);
@@ -79,52 +64,69 @@ async function displayTasks(tasks, currentIndex) {
     displayTasks(tasks, currentIndex);
   }
 
-  createTaskButton.addEventListener('click', function() {
-          const taskTitleInput = document.getElementById('task-title');
-          var now = new Date();
-          var datetime = now.toLocaleString();
-          const title = taskTitleInput.value;
-          const date = datetime;
-          
-          if (title && date) {
-            createNewTask(title, date);
-            taskTitleInput.value = '';
-            ReturnVisibility();
-          } else {
-            alert('Please enter task title.');
-          }
-        });
+  // Display tasks based on the currentIndex
+  async function displayTasks(tasks, currentIndex) {
+    const container = document.getElementById("task-container");
+    container.innerHTML = ""; // Clear the container before adding new tasks
 
-        const prevButton = document.querySelector('.prev');
-        const nextButton = document.querySelector('.next');
-            
-      prevButton.addEventListener('click', function() {
-      if (currentIndex > 0) {
-        currentIndex--;
-        renderTasks(currentIndex);
-      } else if (tasks.length == 0 ) {
-        renderTasks(currentIndex)
-      } 
-      else {
-        currentIndex = tasks.length - 1 }
-        renderTasks(currentIndex)
-    });
-  
-    nextButton.addEventListener('click', function() {
-      if (currentIndex < tasks.length - 1) {
-        currentIndex++;
-        renderTasks(currentIndex);
-      } else {
-        currentIndex = 0;
-        renderTasks(currentIndex)
-      }
-      
-    });
+    if (tasks.length) {
+      const task = tasks[currentIndex]; // Get the current task
+      container.style.opacity = task.opacity;
+              container.innerHTML = `
+                  <h2 class="task-title">${task.title}</h2>
+                  <p class="task-date">${task.date}</p>
+                  <p class="completion-status">${task.completion}</p>
+                  <button class="delete-task-button">Delete</button>
+                  <button class="edit-task-button">Edit</button>
+                  <button class="share-task-button">Share</button>
+                  <button class="complete-task-button">Mark as ${task.completion_task}</button>
+              `;
+    } else {
+      container.innerHTML = "<p>No tasks available</p>";
+    }
+  }
+
+  // Event listener for create task button
+  createTaskButton.addEventListener('click', function() {
+    const taskTitleInput = document.getElementById('task-title');
+    const title = taskTitleInput.value.trim();
+    if (title) {
+      const now = new Date().toLocaleString();
+      createNewTask(title, now);
+      taskTitleInput.value = '';
+      ReturnVisibility();
+    } else {
+      alert('Please enter a task title.');
+    }
+  });
+
+  // Event listeners for navigation buttons
+  const prevButton = document.querySelector('.prev');
+  const nextButton = document.querySelector('.next');
+
+  prevButton.addEventListener('click', function() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      displayTasks(tasks, currentIndex);
+    }
+  });
+
+  nextButton.addEventListener('click', function() {
+    if (currentIndex < tasks.length - 1) {
+      currentIndex++;
+      displayTasks(tasks, currentIndex);
+    }
+  });
+  taskContainer.addEventListener('click', async function(event) {
+    
+  })
+
+
 
   // Call the function to retrieve tasks when the DOM is loaded
-  let currentIndex = 0;
-  retrieveTask(currentIndex);
+  retrieveTasks(currentIndex);
 });
+
 
 
 // document.addEventListener("DOMContentLoaded", function() {
