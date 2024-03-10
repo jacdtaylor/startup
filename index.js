@@ -89,6 +89,11 @@ apiRouter.post('/task', (req, res) => {
   res.send(tasks);
 });
 
+apiRouter.delete('/delete', (req, res) => {
+  tasks.splice(req, 1);
+  res.send(tasks)
+});
+
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });

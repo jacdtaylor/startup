@@ -118,8 +118,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   taskContainer.addEventListener('click', async function(event) {
-    
-  })
+    if (event.target.classList.contains('delete-task-button')) {
+                try {
+                    const response = await fetch('/api/delete', {
+                        method: 'DELETE',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ index: currentIndex }),
+                    });
+                  
+                    const tasks = await response.JSON();
+                  }} else {
+
+                  }
+                
+                });
+                    
+                   
+
 
 
 
