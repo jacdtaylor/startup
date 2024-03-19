@@ -40,22 +40,20 @@ const  userCollection = db.collection("user")
   }
 
 async function addTaskToUser(email, task) {
-    // Find the user by email
     const user = await userCollection.findOne({ email: email });
     if (!user) {
         throw new Error('User not found');
     }
-    // Add the task to the user's tasks array
     user.tasks.push(task);
-    // Update the user document in the collection
     await userCollection.updateOne({ email: email }, { $set: { tasks: user.tasks } });
-
     return user;
 }
 
 
 module.exports = {
 addTaskToUser,
+getUserByToken,
+createUser
 
   };
   
