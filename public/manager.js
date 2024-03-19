@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let currentIndex = 0; // Initialize currentIndex
 
   async function createNewTask(title, date) {
-    
+    const name = getPlayerName();
     const newTask = {
               id:idnum,
               title: title,
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             idnum++;
     try {
-      const response = await fetch('/api/task', {
+      const response = await fetch(`/api/task/${name}`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(newTask),
@@ -54,8 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   async function retrieveTasks(currentIndex) {
+    const name = getPlayerName();
     try {
-      const response = await fetch('/api/tasks');
+      const response = await fetch(`/api/tasks/${name}`);
       tasks = await response.json();
       localStorage.setItem('tasks', JSON.stringify(tasks));
     } catch (error) {
@@ -129,10 +130,12 @@ document.addEventListener('DOMContentLoaded', function() {
   });
  // Event listener for task-container (Event Delegation)
 document.getElementById("task-container").addEventListener('click', async function(event) {
+  const name = getPlayerName();
   if (event.target.classList.contains('delete-task-button')) {
     const indexToDelete = currentIndex; // Store the current index to delete
     try {
-      const response = await fetch('/api/delete', {
+      
+      const response = await fetch(`/api/delete${name}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ index: indexToDelete }),
@@ -158,7 +161,7 @@ document.getElementById("task-container").addEventListener('click', async functi
             tasks[currentIndex].date = taskDate;
 
       try {
-        const response = await fetch(`/api/edit`, {
+        const response = await fetch(`/api/edit${name}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(tasks[currentIndex]),
@@ -191,7 +194,7 @@ document.getElementById("task-container").addEventListener('click', async functi
                     currentTask.completion = "Incomplete"
                 }
                 try {
-                    const response = await fetch(`/api/complete`, {
+                    const response = await fetch(`/api/complete/${name}`, {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify(currentTask),

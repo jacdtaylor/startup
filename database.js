@@ -6,7 +6,7 @@ const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('task_manager');
-const  userCollection = db.collection("user")
+const  userCollection = db.collection('user');
 
 (async function testConnection() {
     await client.connect();
