@@ -1,49 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Tell browsers not to scale the viewport automatically -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CTM HTML</title>
-    <link rel="icon" href="favicon.ico" />
-    <link rel="stylesheet" href="login.css">
-
-  </head>
-
-
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CTM HTML</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="login.css">
   <script src="login.js"></script>
-
-  <body>
-
-    
-
-    <main>
-      <h1>Welcome</h1>
-      <div id="loginControls" style="display: none">
-        <div class="input-group mb-3">
-          <span class="input-group-text">@</span>
-          <input class="form-control" type="text" id="userName" placeholder="your@email.com" />
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text">🔒</span>
-          <input class="form-control" type="password" id="userPassword" placeholder="password" />
-        </div>
-        <button type="button" class="btn btn-primary" onclick="loginUser()">Login</button>
-        <button type="button" class="btn btn-primary" onclick="createUser()">Create</button>
+</head>
+<body>
+  <main>
+    <h1>Welcome</h1>
+    <div id="loginControls">
+      <div class="input-group mb-3">
+        <span class="input-group-text">@</span>
+        <input class="form-control" type="text" id="userName" placeholder="your@email.com" />
       </div>
-
-      <div id="playerName"></div>
-      <button type="button" class="btn btn-primary" onclick="manager()">Play</button>
-      <button type="button" class="btn btn-secondary" onclick="logout()">Logout</button>
+      <div class="input-group mb-3">
+        <span class="input-group-text">🔒</span>
+        <input class="form-control" type="password" id="userPassword" placeholder="password" />
+      </div>
+      <button type="button" class="btn btn-primary" onclick="loginUser()">Login</button>
+      <button type="button" class="btn btn-primary" onclick="createUser()">Create</button>
     </div>
-  </div>
-    </main>
-
-    <footer>
-      <hr />
-      <span class="text-reset">Jac Taylor</span>
-      <br />
-      <a href="https://github.com/jacdtaylor/startup">GitHub</a>
-    </footer>
-  </body>
+    <div id="playerName"></div>
+    <button type="button" class="btn btn-primary" onclick="manager()">Play</button>
+    <button type="button" class="btn btn-secondary" onclick="logout()">Logout</button>
+  </main>
+  <footer>
+    <hr />
+    <span class="text-reset">Jac Taylor</span>
+    <br />
+    <a href="https://github.com/jacdtaylor/startup">GitHub</a>
+  </footer>
+</body>
 </html>

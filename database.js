@@ -57,7 +57,8 @@ module.exports = {
 UpdateTask,
 getUserByToken,
 createUser,
-PullTasks
+PullTasks,
+getUser
 
   };
   
