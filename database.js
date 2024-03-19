@@ -39,21 +39,29 @@ const  userCollection = db.collection("user")
     return user;
   }
 
-async function addTaskToUser(email, task) {
+async function PullTasks(email) {
+    const user = await userCollection.findOne({email: email});
+    if (!user) {
+        throw new Error('User not found');
+    }
+    return user.tasks;
+}
+
+async function UpdateTask(email, newTasks) {
     const user = await userCollection.findOne({ email: email });
     if (!user) {
         throw new Error('User not found');
     }
-    user.tasks.push(task);
-    await userCollection.updateOne({ email: email }, { $set: { tasks: user.tasks } });
+    await userCollection.updateOne({ email: email }, { $set: { tasks: newTasks } });
     return user;
 }
 
 
 module.exports = {
-addTaskToUser,
+UpdateTask,
 getUserByToken,
-createUser
+createUser,
+PullTasks
 
   };
   
