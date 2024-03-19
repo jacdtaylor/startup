@@ -48,10 +48,6 @@ async function PullTasks(email) {
 }
 
 async function UpdateTask(email, newTasks) {
-    const user = await userCollection.findOne({ email: email });
-    if (!user) {
-        throw new Error('User not found');
-    }
     await userCollection.updateOne({ email: email }, { $set: { tasks: newTasks } });
     return user;
 }
