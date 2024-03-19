@@ -80,25 +80,28 @@ secureApiRouter.delete('/delete/:email', (req, res) => {
   res.send(tasks)
 });
 
-secureApiRouter.post('/edit', (req, res) => {
+secureApiRouter.post('/edit/:email', (req, res) => {
   const taskId = req.body.id;
   const updatedTaskData = req.body;
 
   // Find the index of the task with the given ID
+  const tasks = DB.PullTasks(email);
   const taskIndex = tasks.findIndex(task => task.id === taskId); 
   tasks[taskIndex].title = updatedTaskData.title;
   tasks[taskIndex].date = updatedTaskData.date;
+  DB.UpdateTask(email, tasks);
   res.send(tasks)});
 
 
-  apiRouter.post('/complete', (req, res) => {
+  apiRouter.post('/complete/:email', (req, res) => {
+    const tasks = DB.PullTasks(email);
     const taskId = req.body.id;
     const updatedTaskData = req.body;
   
     // Find the index of the task with the given ID
     const taskIndex = tasks.findIndex(task => task.id === taskId); 
-    tasks[taskIndex] = updatedTaskData
-  
+    tasks[taskIndex] = updatedTaskData;
+    DB.UpdateTask(email, tasks);
     res.send(tasks)});
 
 // Return the application's default page if the path is unknown
