@@ -14,16 +14,29 @@
   <script src="login.js"></script>
 
   <body>
-    <!-- Use header, main, and footer elements to give semantic structure -->
+
     
 
     <main>
       <h1>Welcome</h1>
-        <label for="name"></label>
-        <input type="text" id="name" placeholder="Your name here" />
-        <button class="btn btn-primary" onclick="login()">Login</button>
+      <div id="loginControls" style="display: none">
+        <div class="input-group mb-3">
+          <span class="input-group-text">@</span>
+          <input class="form-control" type="text" id="userName" placeholder="your@email.com" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">🔒</span>
+          <input class="form-control" type="password" id="userPassword" placeholder="password" />
+        </div>
+        <button type="button" class="btn btn-primary" onclick="loginUser()">Login</button>
+        <button type="button" class="btn btn-primary" onclick="createUser()">Create</button>
+      </div>
 
-        <div id="quote"></div>
+      <div id="playerName"></div>
+      <button type="button" class="btn btn-primary" onclick="manager()">Play</button>
+      <button type="button" class="btn btn-secondary" onclick="logout()">Logout</button>
+    </div>
+  </div>
     </main>
 
     <footer>
