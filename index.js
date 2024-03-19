@@ -60,22 +60,27 @@ var secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 
 // Get tasks
-apiRouter.get('/tasks', (_req, res) => {
+secureApiRouter.get('/tasks/:email', (_req, res) => {
+  const tasks = DB.PullTasks(email)
   res.send(tasks);
 });
 
 // Submit task
-apiRouter.post('/task', (req, res) => {
+secureApiRouter.post('/task/:email', (req, res) => {
+  const tasks = PullTasks(email);
   tasks.push(req.body);
+  DB.UpdateTask(email, tasks);
   res.send(tasks);
 });
 
-apiRouter.delete('/delete', (req, res) => {
+secureApiRouter.delete('/delete/:email', (req, res) => {
+  const tasks = DB.PullTasks(email);
   tasks.splice(req.body.index, 1);
+  DB.UpdateTask(email, tasks);
   res.send(tasks)
 });
 
-apiRouter.post('/edit', (req, res) => {
+secureApiRouter.post('/edit', (req, res) => {
   const taskId = req.body.id;
   const updatedTaskData = req.body;
 
@@ -107,4 +112,4 @@ app.listen(port, () => {
 
 // updateTasks considers a new task for inclusion in the tasks.
 // The tasks are saved in memory and disappear whenever the service is restarted.
-let tasks = [];
+
