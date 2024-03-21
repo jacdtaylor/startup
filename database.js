@@ -32,7 +32,7 @@ const  userCollection = db.collection('user');
       email: email,
       password: passwordHash,
       token: uuid.v4(),
-      tasks: []
+      tasks: Array()
     };
     await userCollection.insertOne(user);
   
@@ -47,9 +47,8 @@ async function PullTasks(email) {
     return user.tasks;
 }
 
-async function UpdateTask(email, newTasks) {
-    await userCollection.updateOne({ email: email }, { $set: { tasks: newTasks } });
-    return user;
+async function UpdateTask(email, NewTasks) {
+    await userCollection.updateOne({ email: email }, { $set: { tasks: NewTasks } });
 }
 
 

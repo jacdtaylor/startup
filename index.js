@@ -75,48 +75,51 @@ var secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 
 // Get tasks
-secureApiRouter.get('/tasks/:email', (_req, res) => {
-  const tasks = DB.PullTasks(email)
-  res.send(tasks);
+secureApiRouter.get('/tasks/:email', async (req, res) => {
+    res.send(await DB.PullTasks(req.params.email));
 });
 
 // Submit task
-secureApiRouter.post('/task/:email', (req, res) => {
-  const tasks = PullTasks(email);
+secureApiRouter.post('/task/:email', async (req, res) => {
+  try {
+    let tasks = await DB.PullTasks(req.params.email);
+    if (!tasks) { tasks = []; }
+
+
   tasks.push(req.body);
-  DB.UpdateTask(email, tasks);
-  res.send(tasks);
+  DB.UpdateTask(req.params.email, tasks);
+  res.send(JSON.stringify(await DB.PullTasks(req.params.email))); } catch (error) {console.log(error)}
 });
 
-secureApiRouter.delete('/delete/:email', (req, res) => {
-  const tasks = DB.PullTasks(email);
+secureApiRouter.delete('/delete/:email', async (req, res) => {
+  const tasks = await DB.PullTasks(req.params.email);
   tasks.splice(req.body.index, 1);
-  DB.UpdateTask(email, tasks);
-  res.send(tasks)
+  DB.UpdateTask(req.params.email, tasks);
+  res.send(await DB.PullTasks(req.params.email))
 });
 
-secureApiRouter.post('/edit/:email', (req, res) => {
+secureApiRouter.post('/edit/:email', async (req, res) => {
   const taskId = req.body.id;
   const updatedTaskData = req.body;
 
   // Find the index of the task with the given ID
-  const tasks = DB.PullTasks(email);
+  const tasks = await DB.PullTasks(req.params.email);
   const taskIndex = tasks.findIndex(task => task.id === taskId); 
   tasks[taskIndex].title = updatedTaskData.title;
   tasks[taskIndex].date = updatedTaskData.date;
-  DB.UpdateTask(email, tasks);
-  res.send(tasks)});
+  DB.UpdateTask(req.params.email, tasks);
+  res.send(await DB.PullTasks(req.params.email))});
 
 
   apiRouter.post('/complete/:email', (req, res) => {
-    const tasks = DB.PullTasks(email);
+    const tasks = DB.PullTasks(req.params.email);
     const taskId = req.body.id;
     const updatedTaskData = req.body;
   
     // Find the index of the task with the given ID
     const taskIndex = tasks.findIndex(task => task.id === taskId); 
     tasks[taskIndex] = updatedTaskData;
-    DB.UpdateTask(email, tasks);
+    DB.UpdateTask(req.params.email, tasks);
     res.send(tasks)});
 
 // Return the application's default page if the path is unknown
