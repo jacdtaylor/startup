@@ -87,15 +87,17 @@ secureApiRouter.post('/task/:email', async (req, res) => {
 
 
   tasks.push(req.body);
-  DB.UpdateTask(req.params.email, tasks);
+  await DB.UpdateTask(req.params.email, tasks);
   res.send(JSON.stringify(await DB.PullTasks(req.params.email))); } catch (error) {console.log(error)}
 });
 
 secureApiRouter.delete('/delete/:email', async (req, res) => {
+  console.log("here")
   const tasks = await DB.PullTasks(req.params.email);
   tasks.splice(req.body.index, 1);
-  DB.UpdateTask(req.params.email, tasks);
-  res.send(await DB.PullTasks(req.params.email))
+  await DB.UpdateTask(req.params.email, tasks);
+  console.log(tasks)
+  res.send(tasks)
 });
 
 secureApiRouter.post('/edit/:email', async (req, res) => {
@@ -107,20 +109,20 @@ secureApiRouter.post('/edit/:email', async (req, res) => {
   const taskIndex = tasks.findIndex(task => task.id === taskId); 
   tasks[taskIndex].title = updatedTaskData.title;
   tasks[taskIndex].date = updatedTaskData.date;
-  DB.UpdateTask(req.params.email, tasks);
+  await DB.UpdateTask(req.params.email, tasks);
   res.send(await DB.PullTasks(req.params.email))});
 
 
-  apiRouter.post('/complete/:email', (req, res) => {
-    const tasks = DB.PullTasks(req.params.email);
+  apiRouter.post('/complete/:email', async (req, res) => {
+    const tasks = await DB.PullTasks(req.params.email);
     const taskId = req.body.id;
     const updatedTaskData = req.body;
   
     // Find the index of the task with the given ID
     const taskIndex = tasks.findIndex(task => task.id === taskId); 
     tasks[taskIndex] = updatedTaskData;
-    DB.UpdateTask(req.params.email, tasks);
-    res.send(tasks)});
+    await DB.UpdateTask(req.params.email, tasks);
+    res.send(await DB.PullTasks(req.params.email))});
 
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {

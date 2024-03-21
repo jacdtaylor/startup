@@ -138,7 +138,7 @@ document.getElementById("task-container").addEventListener('click', async functi
     const indexToDelete = currentIndex; // Store the current index to delete
     try {
       
-      const response = await fetch(`/api/delete${name}`, {
+      const response = await fetch(`/api/delete/${name}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ index: indexToDelete }),
