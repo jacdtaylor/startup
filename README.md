@@ -68,9 +68,17 @@ For this deliverable I implemented by JavaScript so that the application works f
 - **application logic** - Editing, deleting, creating and marking tasks as complete all have been implemented. Users also can go through tasks.
 
 
-## simon-service
+## startup-service
 - **Create an HTTP service using Node.js and Express** HTTP Service Set Up
 - **Frontend served up using Express static middleware** Express Middleware Used
 - **frontend calls third party service endpoints** Gets Random Quote When No Tasks
 - **Your backend provides service endpoints** Creates Service Endpoints
 - **frontend calls your service endpoints** Calls Endpoints to Get Tasks
+
+
+## startup-login
+- **Supports new user registration** Users can create accounts and have data persist
+- **Supports existing user authentication** Users can login to their accounts and retrieve their data
+- **Stores application data in MongoDB** Data is stored for individual users
+- **Stores and retrieves credentials in MongoDB** Login feature utilizes MongoDB
+- **Restricts application functionality based upon authentication** Unable to login without correct username and password.
