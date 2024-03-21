@@ -21,6 +21,13 @@ async function createUser() {
 async function loginOrCreate(endpoint) {
   const userName = document.querySelector('#userName')?.value;
   const password = document.querySelector('#userPassword')?.value;
+
+  // Check if username or password is empty
+  if (!userName || !password) {
+    alert("Please enter both username and password.");
+    return; // Exit function early
+  }
+
   const response = await fetch(endpoint, {
     method: 'post',
     body: JSON.stringify({ email: userName, password: password }),
@@ -40,6 +47,7 @@ async function loginOrCreate(endpoint) {
     msgModal.show();
   }
 }
+
 
 function manager() {
   window.location.href = 'manager.html';
