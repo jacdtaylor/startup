@@ -83,20 +83,17 @@ secureApiRouter.get('/tasks/:email', async (req, res) => {
 secureApiRouter.post('/task/:email', async (req, res) => {
   try {
     let tasks = await DB.PullTasks(req.params.email);
-    if (!tasks) { tasks = []; }
-
-
+    if (!tasks) { tasks = array(); }
   tasks.push(req.body);
+  console.log(tasks);
   await DB.UpdateTask(req.params.email, tasks);
-  res.send(JSON.stringify(await DB.PullTasks(req.params.email))); } catch (error) {console.log(error)}
+  res.send(tasks); } catch (error) {console.log(error)}
 });
 
 secureApiRouter.delete('/delete/:email', async (req, res) => {
-  console.log("here")
   const tasks = await DB.PullTasks(req.params.email);
   tasks.splice(req.body.index, 1);
   await DB.UpdateTask(req.params.email, tasks);
-  console.log(tasks)
   res.send(tasks)
 });
 

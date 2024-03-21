@@ -51,8 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (error) {
       console.error('Error creating new task:', error);
     }
-    displayTasks(tasks, currentIndex);
-    
+    retrieveTasks(currentIndex);
   }
 
   async function retrieveTasks(currentIndex) {
@@ -68,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
         tasks = JSON.parse(tasksText);
       }
     }
+
     displayTasks(tasks, currentIndex);
   }
 
@@ -164,7 +164,7 @@ document.getElementById("task-container").addEventListener('click', async functi
             tasks[currentIndex].date = taskDate;
 
       try {
-        const response = await fetch(`/api/edit${name}`, {
+        const response = await fetch(`/api/edit/${name}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(tasks[currentIndex]),
