@@ -1,0 +1,20 @@
+.user-row {
+    display: flex;
+    align-items: center; /* Align items vertically */
+  }
+  
+  .CurrentUser {
+    color: rgb(165, 220, 235); /* Set your desired color */
+    font-weight: bold;
+    margin-right: 10px; /* Add some space between username and text */
+  }
+  
+  .OtherUser {
+    color: rgb(221, 148, 40); /* Set your desired color */
+    font-weight: bold;
+    margin-right: 10px; /* Add some space between username and text */
+  }
+  
+  .shared {
+    color: white; /* Set your desired color */
+  }

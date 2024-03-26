@@ -32,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function displayMsg(from, msg) {
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('event');
-    messageDiv.innerHTML = `<span class="from">${from}</span>: ${msg}`;
+    messageDiv.innerHTML = `<div class="user-row">
+    <span class="OtherUser">${from}:</span> ${msg}
+  </div>`;
     chatMessages.appendChild(messageDiv);
   }
 
@@ -44,8 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     messageDiv.classList.add('event');
     messageDiv.innerHTML = `
     <div class="user-row">
-    <span class="CurrentUser">${playerName}:</span>
-    <span class="text">${message}</span>
+    <span class="CurrentUser">${playerName}:</span> ${message}
   </div>`;
     chatMessages.appendChild(messageDiv);
     const currentForum = await fetch(`api/Forum/${playerName}`);
