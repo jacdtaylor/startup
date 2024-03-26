@@ -87,6 +87,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       // Update the displayed forum
       displayedForum.textContent = newForum;
       forum.forum = newForum
+      chatMessages.innerHTML = '';
+      forumInput.value = ""
     }
   }
 
