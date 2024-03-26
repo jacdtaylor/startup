@@ -8,21 +8,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   const changeForumBtn = document.getElementById('change-forum-btn');
   const playerName = getPlayerName();
   const forumInput = document.getElementById('forum-input');
-
+  
   const displayedForum = document.getElementById('current-forum');
 
   // Get and display the current forum
-  let forum = await getForum(getPlayerName());
-  displayedForum.textContent = forum;
+  const forum = {forum:"Public"};
+  displayedForum.textContent = forum.forum;
 
   let socket;
   configureWebSocket();
 
-  async function getForum(user) {
-    const response = await fetch(`api/Forums/${user}`);
-    const forumData = await response.text();
-    return forumData; // Assuming forumData contains forum information
-  }
 
 
 
@@ -33,11 +28,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   function configureWebSocket() {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
     socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-
+    socket.onopen = () => {
+      console.log('WebSocket connection established.');
+    };
+  
+    socket.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+  
     socket.onmessage = async (event) => {
-      const msg = JSON.parse(event.data);
-      const currentForum = await getForum(msg.from); // Use msg.from to get the forum for the sender
-      if (msg.forum === currentForum) {
+      const stuff = await event.data.text()
+      console.log("Received message:", stuff);
+
+      // console.log("recieved Message")
+      const msg = JSON.parse(stuff);
+      if (msg.forum === forum.forum) {
         displayMsg(msg.from, msg.message);
       }
     };
@@ -55,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   async function sendMessage() {
     const message = messageInput.value.trim();
     console.log(message)
-
+    
     // Display sent message
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('event');
@@ -64,15 +69,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         <span class="CurrentUser">${playerName}:</span> ${message}
       </div>`;
     chatMessages.appendChild(messageDiv);
-
     // Send message along with the current forum
-    const currentForum = await getForum(playerName);
     if (message !== '') {
       const event = {
         from: playerName,
         message: message,
-        forum: currentForum
+        forum: forum.forum
       };
+     
       socket.send(JSON.stringify(event));
       messageInput.value = '';
     }
@@ -82,16 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (newForum !== '') {
       // Update the displayed forum
       displayedForum.textContent = newForum;
-
-      // You can further implement sending the new forum to the server here
-      // For example:
-      await fetch(`api/Forum/${playerName}`, {
-        method: 'POST',
-        body: JSON.stringify({newForum: newForum}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+      forum.forum = newForum
     }
   }
 

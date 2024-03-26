@@ -32,8 +32,7 @@ const  userCollection = db.collection('user');
       email: email,
       password: passwordHash,
       token: uuid.v4(),
-      tasks: Array(),
-      Forum: "Public"
+      tasks: Array()
     };
     await userCollection.insertOne(user);
   
@@ -52,17 +51,7 @@ async function UpdateTask(email, NewTasks) {
     await userCollection.updateOne({ email: email }, { $set: { tasks: NewTasks } });
 }
 
-async function UpdateForum(email, Forum) {
-  await userCollection.updateOne({ email: email }, { $set: { Forum: Forum } });
-}
 
-async function PullForum(email) {
-  const user = await userCollection.findOne({email: email});
-  if (!user) {
-      throw new Error('User not found');
-  }
-  return user.Forum;
-}
 
 
 
@@ -71,9 +60,7 @@ UpdateTask,
 getUserByToken,
 createUser,
 PullTasks,
-getUser,
-PullForum,
-UpdateForum
+getUser
 
   };
   
