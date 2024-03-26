@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       // For example:
       await fetch(`api/Forum/${playerName}`, {
         method: 'POST',
-        body: NewForum,
+        body: JSON.stringify({newForum: newForum}),
         headers: {
           'Content-Type': 'application/json'
         }
