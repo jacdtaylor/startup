@@ -36,12 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
     chatMessages.appendChild(messageDiv);
   }
 
-  function sendMessage() {
+  async function sendMessage() {
     const message = messageInput.value.trim();
+    const currentForum = await fetch(`api/Forum/${playerName}`);
+
     if (message !== '') {
       const event = {
         from: playerName,
-        message: message
+        message: message,
+        forum: currentForum
       };
       socket.send(JSON.stringify(event));
       messageInput.value = '';
