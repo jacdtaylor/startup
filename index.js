@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const app = express();
 const DB = require('./database.js');
+const { peerProxy } = require('./peerProxy.js');
 
 const authCookieName = 'token';
 
@@ -144,10 +145,10 @@ function setAuthCookie(res, authToken) {
 }
 
 
-app.listen(port, () => {
+const httpService = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
+peerProxy(httpService);
 // updateTasks considers a new task for inclusion in the tasks.
 // The tasks are saved in memory and disappear whenever the service is restarted.
 

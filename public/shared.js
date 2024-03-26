@@ -37,8 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function sendMessage() {
-    console.log("sending MEssage")
+    
     const message = messageInput.value.trim();
+    console.log(message)
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('event');
+    messageDiv.innerHTML = `<p>${message}</p>`;
+    chatMessages.appendChild(messageDiv);
     const currentForum = await fetch(`api/Forum/${playerName}`);
 
     if (message !== '') {
