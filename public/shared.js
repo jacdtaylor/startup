@@ -85,9 +85,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       // You can further implement sending the new forum to the server here
       // For example:
-      await fetch(`/api/Forums/${getPlayerName()}`, {
+      await fetch(`api/Forum/${playerName}`, {
         method: 'POST',
-        body: JSON.stringify({newForum: newForum}),
+        body: NewForum,
         headers: {
           'Content-Type': 'application/json'
         }
