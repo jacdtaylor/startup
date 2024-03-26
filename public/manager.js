@@ -92,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
                   <p class="completion-status">${task.completion}</p>
                   <button class="delete-task-button">Delete</button>
                   <button class="edit-task-button">Edit</button>
-                  <button class="share-task-button">Share</button>
                   <button class="complete-task-button">Mark as ${task.completion_task}</button>
               `;
     } else {

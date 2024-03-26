@@ -11,127 +11,40 @@ function getPlayerName() {
   return localStorage.getItem('userName') ?? 'guest';
 }
 
-function InputVisibility() {
-    var T = document.getElementById("InputFields");
-    var V = document.getElementById("RevealOptions")
-    T.style.display = "block";
-    V.style.display = "none"
-      // <-- Set it to block
+
+async function configureWebSocket() {
+  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+  this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+  this.socket.onopen = (event) => {
+    this.displayMsg('system', 'game', 'connected');
+  };
+  this.socket.onclose = (event) => {
+    this.displayMsg('system', 'game', 'disconnected');
+  };
+  this.socket.onmessage = async (event) => {
+    const msg = JSON.parse(await event.data.text());
+    const name = getPlayerName();
+    let currentForum = await fetch(`/Forum/${name}`)
+
+    if (msg.type === GameEndEvent) {
+      this.displayMsg('player', msg.from, `scored ${msg.value.score}`);
+    } else if (msg.type === GameStartEvent) {
+      this.displayMsg('player', msg.from, `started a new game`);
+    }
+  };
 }
 
-function ReturnVisibility() {
-    var V = document.getElementById("InputFields");
-    var T = document.getElementById("RevealOptions")
-    T.style.display = "block";
-    V.style.display = "none"
+function displayMsg(cls, from, msg) {
+  const chatText = document.querySelector('#player-messages');
+  chatText.innerHTML =
+    `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    const tasks = []; // Array to store tasks
-  
-    const taskContainer = document.getElementById('task-container');
-    const taskTitleInput = document.getElementById('task-title');
-    const taskDateInput = document.getElementById('task-date');
-    const createTaskButton = document.querySelector('.create-task-button');
-  
-    // Function to create a new task
-    function createTask(title, date) {
-      const task = {
-        title: title,
-        date: date,
-        completion_value: -1,
-        completion: "Incomplete",
-        completion_task: "Complete",
-        opacity: 1,
-        owner: getPlayerName()
-      };
-      tasks.push(task);
-      renderTasks();
-    }
-  
-    // Function to render tasks
-    function renderTasks() {
-      const currentTask = tasks[currentIndex];
-      if (currentTask) {
-        const container = document.getElementById("task-container");
-        container.style.opacity = currentTask.opacity;
-        taskContainer.innerHTML = `
-          <h2 class="task-title">${currentTask.title}</h2>
-          <p class="task-date">${currentTask.date}</p>
-          <p class="completion-status">${currentTask.completion}</p>
-          <p class="owner">Owner: ${currentTask.owner}</p>
-          <button class="delete-task-button">Remove</button>
-          <button class="edit-task-button">Edit</button>
-          <button class="complete-task-button">Mark as ${currentTask.completion_task}</button>
-        `;
-      } else {
-        taskContainer.innerHTML = `<p>No tasks available</p>`;
-      }
-    }
-  
-    // Event listener for create task button
-
-  
-    // Navigation buttons
-    const prevButton = document.querySelector('.prev');
-    const nextButton = document.querySelector('.next');
-    let currentIndex = 0;
-  
-    prevButton.addEventListener('click', function() {
-      if (currentIndex > 0) {
-        currentIndex--;
-        renderTasks();
-      } else {
-        currentIndex = tasks.length - 1 }
-        renderTasks()
-    });
-  
-    nextButton.addEventListener('click', function() {
-      if (currentIndex < tasks.length - 1) {
-        currentIndex++;
-        renderTasks();
-      } else {
-        currentIndex = 0;
-        renderTasks()
-      }
-      
-    });
-
-
-    taskContainer.addEventListener('click', function(event) {
-        if (event.target.classList.contains('edit-task-button')) {
-          const currentTask = tasks[currentIndex];
-          const taskTitle = prompt('Enter new task title:', currentTask.title);
-          const taskDate = prompt('Enter new task date:', currentTask.date);
-          if (taskTitle !== null && taskDate !== null) {
-            currentTask.title = taskTitle;
-            currentTask.date = taskDate;
-            renderTasks();
-          }} else if (event.target.classList.contains('complete-task-button')) {
-            const currentTask = tasks[currentIndex];
-            currentTask.completion_value *= -1;
-                
-            if (currentTask.completion_value == 1) {
-                currentTask.opacity = 0.5
-
-
-                currentTask.completion = "Completed"
-                currentTask.completion_task ="Incomplete"
-            } else {
-                currentTask.opacity = 1;
-                currentTask.completion_task ="Complete"
-                currentTask.completion = "Incomplete"
-            }
-            renderTasks();
-          } else if (event.target.classList.contains('Simulate-Shared-Tasks')) {
-            createTask("Do the Dishes", "6/18/2023");
-            tasks[0].owner = "Jess";
-            createTask("Write Grandma", "12/20/2023");
-            tasks[1].owner = "Mom";
-            createTask("Buy BBQ Meat", "7/3/2024");
-            tasks[2].owner = "Donald";
-            renderTasks();
-          }
-        }
-  );
-        })
+function broadcastEvent(from, forum, message) {
+  const event = {
+    from: from,
+    forum: forum,
+    message: message,
+  };
+  this.socket.send(JSON.stringify(event));
+}
