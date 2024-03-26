@@ -42,7 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(message)
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('event');
-    messageDiv.innerHTML = `<p>${message}</p>`;
+    messageDiv.innerHTML = `
+    <div class="user-row">
+    <span class="CurrentUser">${playerName}:</span>
+    <span class="text">${message}</span>
+  </div>`;
     chatMessages.appendChild(messageDiv);
     const currentForum = await fetch(`api/Forum/${playerName}`);
 
