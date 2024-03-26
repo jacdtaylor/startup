@@ -82,3 +82,9 @@ For this deliverable I implemented by JavaScript so that the application works f
 - **Stores application data in MongoDB** Data is stored for individual users
 - **Stores and retrieves credentials in MongoDB** Login feature utilizes MongoDB
 - **Restricts application functionality based upon authentication** Unable to login without correct username and password.
+
+## startup-websocket
+- **Backend listens for WebSocket connection** This is accomplished through the peerProxy file
+- **Frontend makes WebSocket connection** This is done in the shared.html page
+- **Data sent over WebSocket connection** Chat data is sent over the WebSocket Connection
+- **WebSocket data displayed in the application interface** Data is displayed in group forums

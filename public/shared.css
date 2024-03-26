@@ -18,3 +18,93 @@
   .shared {
     color: white; /* Set your desired color */
   }
+
+  body {
+    background-color: #222; /* Dark background color */
+    color: #fff; /* Light text color */
+  }
+  
+  #chat-box {
+    background-color: #333; /* Darker background color for chat box */
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  #player-messages {
+    max-height: 200px; /* Limit height of message container */
+    overflow-y: auto; /* Add scrollbar when messages exceed container height */
+  }
+  
+
+  #forum-input {
+    width: calc(100% - 100px); /* Adjust input width */
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #888; /* Dark border color */
+    border-radius: 5px;
+    background-color: #444; /* Darker input background color */
+    color: #fff; /* Light input text color */
+  }
+  #message-input {
+    width: calc(100% - 100px); /* Adjust input width */
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #888; /* Dark border color */
+    border-radius: 5px;
+    background-color: #444; /* Darker input background color */
+    color: #fff; /* Light input text color */
+  }
+  
+  #send-button {
+    width: 80px; /* Adjust button width */
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Blue send button color */
+    color: #fff; /* Light text color */
+    cursor: pointer;
+  }
+  
+  #send-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  #current-forum {
+    color: #ccc; /* Lighter text color for current forum */
+  }
+  
+  #change-forum-btn {
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Blue button color */
+    color: #fff; /* Light text color */
+    cursor: pointer;
+  }
+  
+  #change-forum-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  /* Adjust input and button styles */
+  input[type="text"], button {
+    font-size: 16px;
+    outline: none;
+  }
+  
+  /* Adjust button hover effects */
+  button:hover {
+    filter: brightness(85%);
+  }
+  
+  /* Adjust button focus effects */
+  button:focus {
+    box-shadow: 0 0 0 2px #007bff; /* Blue border on focus */
+  }
+  
+  .event {
+    margin-bottom: 10px; /* Increase space between each message */
+  }
