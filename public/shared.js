@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function sendMessage() {
+    console.log("sending MEssage")
     const message = messageInput.value.trim();
     const currentForum = await fetch(`api/Forum/${playerName}`);
 
