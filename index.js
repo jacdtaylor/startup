@@ -83,7 +83,7 @@ secureApiRouter.get('/Forums/:email', async (req, res) => {
   res.send(await DB.PullForum(req.params.email));
 });
 
-secureApiRouter.push('Forums/:email', async (req, res) => {
+secureApiRouter.post('Forums/:email', async (req, res) => {
   DB.UpdateForum(req.params.email, req.body);
   req.send(req.body);
 })

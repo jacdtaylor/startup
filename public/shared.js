@@ -1,50 +1,57 @@
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  const playerNameEl = document.querySelector('.player-name');
+  playerNameEl.textContent = getPlayerName();
 
+  const messageInput = document.getElementById('message-input');
+  const sendButton = document.getElementById('send-button');
+  const chatMessages = document.getElementById('player-messages');
 
+  const playerName = getPlayerName();
+  let socket;
 
+  configureWebSocket();
 
-const playerNameEl = document.querySelector('.player-name');
-playerNameEl.textContent = getPlayerName();
+  function getPlayerName() {
+    return localStorage.getItem('userName') || 'guest';
+  }
 
-function getPlayerName() {
-  return localStorage.getItem('userName') ?? 'guest';
-}
+  function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onmessage = async (event) => {
+      const msg = JSON.parse(event.data);
+      const currentForum = await fetch(`api/Forum/${playerName}`);
+      if (msg.forum === currentForum) {
+        displayMsg(msg.from, msg.message);
+      }
+    };
+  }
 
+  function displayMsg(from, msg) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('event');
+    messageDiv.innerHTML = `<span class="from">${from}</span>: ${msg}`;
+    chatMessages.appendChild(messageDiv);
+  }
 
-async function configureWebSocket() {
-  const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-  this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-  this.socket.onopen = (event) => {
-    this.displayMsg('system', 'game', 'connected');
-  };
-  this.socket.onclose = (event) => {
-    this.displayMsg('system', 'game', 'disconnected');
-  };
-  this.socket.onmessage = async (event) => {
-    const msg = JSON.parse(await event.data.text());
-    const name = getPlayerName();
-    let currentForum = await fetch(`/Forum/${name}`)
-
-    if (msg.type === GameEndEvent) {
-      this.displayMsg('player', msg.from, `scored ${msg.value.score}`);
-    } else if (msg.type === GameStartEvent) {
-      this.displayMsg('player', msg.from, `started a new game`);
+  function sendMessage() {
+    const message = messageInput.value.trim();
+    if (message !== '') {
+      const event = {
+        from: playerName,
+        message: message
+      };
+      socket.send(JSON.stringify(event));
+      messageInput.value = '';
     }
-  };
-}
+  }
 
-function displayMsg(cls, from, msg) {
-  const chatText = document.querySelector('#player-messages');
-  chatText.innerHTML =
-    `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
-}
-
-function broadcastEvent(from, forum, message) {
-  const event = {
-    from: from,
-    forum: forum,
-    message: message,
-  };
-  this.socket.send(JSON.stringify(event));
-}
+  sendButton.addEventListener('click', sendMessage);
+  messageInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      sendMessage();
+    }
+  });
+});
