@@ -1,11 +1,16 @@
 
-
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { Manager } from './manager/manager';
+import { Forum } from './forum/forum';
+import { About } from './about/about';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 export default function App() {
   return (
+    <BrowserRouter>
     <div>
       <header className='container-fluid'>
         <nav className='navbar fixed-top navbar-dark'>
@@ -15,16 +20,23 @@ export default function App() {
           <div className="dropdown">
     <button className="dropbtn">Menu</button>
     <div className="dropdown-content">
-      <a href="index.html" onclick="Logout()">Logout</a>
-      <a href="manager.html">Personal Manager</a>
-      <a href="shared.html">Forum</a>
-      <a href="about.html">About</a>
+    
+      <NavLink className='nav-link' to=''>Login</NavLink>
+      <NavLink className='nav-link' to='manager'>Manager</NavLink>
+      <NavLink className='nav-link' to='forum'>Forum</NavLink>
+      <NavLink className='nav-link' to='about'>About</NavLink>
     </div>
     </div>
         </nav>
       </header>
 
-      <main className = 'containter-fluid'>App components go here</main>
+      <Routes>
+        <Route path='/' element={<Login />} exact />
+        <Route path='/manager' element={<Manager />} />
+        <Route path='/forum' element={<Forum />} />
+        <Route path='/about' element={<About />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
 
       <footer>
       <div className = 'containter-fluid'>
@@ -35,6 +47,11 @@ export default function App() {
       </div>
     </footer>
     </div>
+    </BrowserRouter>
   );
 
+}
+
+function NotFound() {
+  return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
 }
