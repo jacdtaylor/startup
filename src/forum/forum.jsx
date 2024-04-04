@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "./shared.css"
 
 export function Forum() {
   const [playerName, setPlayerName] = useState('');
