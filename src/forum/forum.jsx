@@ -6,6 +6,7 @@ export function Forum() {
   const [currentForum, setCurrentForum] = useState("Public");
   const [events, setEvents] = useState([]);
   const [messageInput, setMessageInput] = useState('');
+  const [forumImput, setForumInput] = useState('');
 
   React.useEffect(() => {
     Notifier.addHandler(handleGameEvent);
@@ -20,13 +21,16 @@ export function Forum() {
   }
 
   function createMessageArray() {
-    console.log(events)
-    return events.map((event, index) => (
-      <div key={index} className='event'>
-        <span className={'player-event'}style={{color: (event.from === localStorage.getItem('userName') ? "rgb(165, 220, 235)" : "rgb(221, 148, 40)")}}>{event.from.split('@')[0]}: </span>
-        {event.message}
-      </div>
-    ));
+    return events
+      .filter(event => event.forum === currentForum) // Filter events by the current forum
+      .map((event, index) => (
+        <div key={index} className='event'>
+          <span className={'player-event'} style={{color: (event.from === localStorage.getItem('userName') ? "rgb(165, 220, 235)" : "rgb(221, 148, 40)")}}>
+            {event.from.split('@')[0]}: 
+          </span>
+          {event.message}
+        </div>
+      ));
   }
 
   function sendMessage() {
@@ -38,13 +42,22 @@ export function Forum() {
 
   function changeForum(newForum) {
     setCurrentForum(newForum);
+    setForumInput("")
   }
 
   return (
     <main>
       <div>
-        <input type="text" id="forum-input" placeholder="Enter new forum..." />
-        <button id="change-forum-btn" onClick={() => changeForum("New Forum")}>Change Forum</button>
+        <div>{currentForum}</div>
+        <input
+          type="text"
+          id="forum-input"
+          placeholder="Enter New Forum"
+          value={forumImput}
+          onChange={(e) => setForumInput(e.target.value)}
+          
+        />
+        <button id="change-forum-btn" onClick={() => changeForum(forumImput)}>Change Forum</button>
       </div>
 
       <br />
@@ -53,7 +66,9 @@ export function Forum() {
         <div id="player-messages">
           {createMessageArray()}
         </div>
-        <input
+        
+      </div>
+      <input
           type="text"
           id="message-input"
           placeholder="Type your message..."
@@ -66,7 +81,6 @@ export function Forum() {
           }}
         />
        
-      </div>
       <button className="send-button" onClick={sendMessage}>Send</button>
     </main>
   );

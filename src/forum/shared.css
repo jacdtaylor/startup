@@ -33,7 +33,7 @@
   }
   
   #player-messages {
-    max-height: 200px; /* Limit height of message container */
+    max-height: 125px; /* Limit height of message container */
     overflow-y: auto; /* Add scrollbar when messages exceed container height */
   }
   
