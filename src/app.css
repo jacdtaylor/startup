@@ -1,354 +1,108 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #303030; /* Dark background */
-    color: #fff; /* Light text color */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensures the layout stretches to at least the height of the viewport */
-    text-align: center;
-  }
-
-  #rectangle {
-    position: relative;
-    width: 100 vh;
-    height: 50 vh;
-    background-color: #505c49;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #303030; /* Dark background */
+  color: #fff; /* Light text color */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the layout stretches to at least the height of the viewport */
+  text-align: center;
+}
 
 header {
-    font-family: "Georgia", sans-serif;
-    color: #fff;
-    padding: 20px;
-    text-shadow: .1px .1px 1px #ff6d6d;
-  }
-  
-  .header-content {
-    display: flex;
-    justify-content: space-between; /* Align items with space between */
-    align-items: center; /* Vertically align items */
-  }
-  
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #222;
-    width: 200px; /* Set a specific width for the dropdown menu */
+  font-family: "Georgia", sans-serif;
+  color: #fff;
+  padding: 20px;
+  text-shadow: .1px .1px 1px #ff6d6d;
+}
+
+.main-content {
+  flex: 1; /* Takes up remaining vertical space */
+}
+
+footer {
+  background-color: #222; /* Darker background for footer */
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  flex-shrink: 0; /* Prevents footer from shrinking */
+  position:absolute;
+left:0;
+bottom:0;
+right:0;
+}
+
+
+#rectangle {
+  position: relative;
+  width: 100vw;
+  height: 50vh;
+  background-color: #505c49;
+}
+
+
+
+.header-content {
+  display: flex;
+  justify-content: space-between; /* Align items with space between */
+  align-items: center; /* Vertically align items */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  width: 200px; /* Set a specific width for the dropdown menu */
   max-width: calc(100vw - 140px); /* Set max width to prevent overflow */
-    z-index: 1;
-    top: 100%; /* Position dropdown below button */
-    right: 0; /* Align dropdown to the right */
-    text-align: right;
-
-  }
-
-
-  
-  .dropdown-content a {
-    color: #fff;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: #444;
-    color:#ff6d6d;
-  }
-  
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  
-  .dropbtn {
-    background-color: transparent;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    font-size: 16px;
-  }
-  
-  
-
-  .directional
-{
-    margin-left: auto;
-    margin-right: auto;
-}
-  main {
-    flex: 1; /* Takes up remaining vertical space */
-    padding: 20px;
-  }
-  
-  .user {
-    margin-bottom: 20px;
-  }
-  
-/* Footer styles */
-  footer {
-    background-color: #222; /* Darker background for footer */
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    flex-shrink: 0;
-    }
-      
-    
-
-.prev {
-  width: 100px;
-  height: 25px;
-  background-color: rgb(73, 73, 73);
-  font-size: 16px;
-  color: #f1f1f1;
-
+  z-index: 1;
+  top: 100%; /* Position dropdown below button */
+  right: 0; /* Align dropdown to the right */
+  text-align: right;
 }
 
-.prev:hover {
-  color:#ff6d6d;
-  background-color: rgb(46, 46, 46);
+.dropdown-content a {
+  color: #fff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #444;
+  color: #ff6d6d;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropbtn {
+  background-color: transparent;
+  color: #fff;
+  border: none;
   cursor: pointer;
-
-}
-
-.next {
-  width: 100px;
-  height: 25px;
-  background-color: rgb(73, 73, 73);
+  padding: 0;
   font-size: 16px;
-  color: #f1f1f1;
-
 }
 
-.next:hover {
-  color:#ff6d6d;
-  background-color: rgb(46, 46, 46);
-  cursor: pointer;
-
-}
-
-.RevealOptions {
-  margin-left:auto;
-  margin-right:auto;
-  background-color: rgb(73, 73, 73);
-  font-size: 16px;
-  color: #f1f1f1;
-}
-
-.RevealOptions:hover {
-  color:#ff6d6d;
-  background-color: rgb(46, 46, 46);
-  cursor: pointer;
-}
-
-.delete-task-button {
-  margin-left:auto;
-  margin-right:auto;
-  background-color: rgb(73, 73, 73);
-  font-size: 16px;
-  color: #f1f1f1;
-}
-.delete-task-button:hover {
-  color:#ff6d6d;
-  background-color: rgb(46, 46, 46);
-  cursor: pointer;
-}
-
-
-.edit-task-button {
-  margin-left:auto;
-  margin-right:auto;
-  background-color: rgb(73, 73, 73);
-  font-size: 16px;
-  color: #f1f1f1;
-}
-.edit-task-button:hover {
-  color:#ff6d6d;
-  background-color: rgb(46, 46, 46);
-  cursor: pointer;
-}
-
-
-
-
-.complete-task-button {
-  margin-left:auto;
-  margin-right:auto;
-  background-color: rgb(73, 73, 73);
-  font-size: 16px;
-  color: #f1f1f1;
-}
-.complete-task-button:hover {
-  color:#ff6d6d;
-  background-color: rgb(46, 46, 46);
-  cursor: pointer;
-}
-
-.create-task-button {
-  margin-left:auto;
-  margin-right:auto;
-  background-color: rgb(73, 73, 73);
-  font-size: 16px;
-  color: #f1f1f1;
-}
-.create-task-button:hover {
-  color:#ff6d6d;
-  background-color: rgb(46, 46, 46);
-  cursor: pointer;
-}
-
-.share-task-button {
-  margin-left:auto;
-  margin-right:auto;
-  background-color: rgb(73, 73, 73);
-  font-size: 16px;
-  color: #f1f1f1;
-}
-.share-task-button:hover {
-  color:#ff6d6d;
-  background-color: rgb(46, 46, 46);
-  cursor: pointer;
-}
-
-
-.text-input {
+.directional {
   margin-left: auto;
   margin-right: auto;
-  background-color: rgb(73, 73, 73);
-  color: #f1f1f1;
-  border: none;
-  border-radius: 5px;
-  padding: 8px;
-  font-size: 16px;
 }
 
-.text-input:focus {
-  outline: none;
+main {
+  flex: 1; /* Takes up remaining vertical space */
+  padding: 20px;
 }
 
-/* Styling for date input */
-.date-input {
-  margin-left: auto;
-  margin-right: auto;
-  background-color: rgb(73, 73, 73);
-  color: #f1f1f1;
-  border: none;
-  border-radius: 5px;
-  padding: 8px;
-  font-size: 16px;
+.user {
+  margin-bottom: 20px;
 }
 
-.date-input:focus {
-  outline: none;
-}
-
-
-    .task-container {
-      margin-left:auto;
-      margin-right:auto;
-      width:200px;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: #242424;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      text-align: center;
-    }
-    
-    .task-title {
-      font-size: 24px;
-      color: #ffffff;
-    }
-    
-    .task-date {
-      font-size: 18px;
-      color: #a1a1a1;
-      margin-top: 10px;
-    }
-
-    .complete {
-      width: 200px;
-        height: 50px;
-        background-color: rgb(73, 73, 73);
-        font-size: 16px;
-        color: #f1f1f1;
-    }
-
-    .complete:hover {
-      color:#ff6d6d;
-      background-color: rgb(46, 46, 46);
-      cursor: pointer;
-
-    }
-
-    .remove {
-      width: 175px;
-        height: 50px;
-        background-color: rgb(73, 73, 73);
-        font-size: 16px;
-        color: #f1f1f1;
-    }
-
-    .remove:hover {
-      color:#ff6d6d;
-      background-color: rgb(46, 46, 46);
-      cursor: pointer;
-
-    }
-
-
-    .player-name {
-      text-align: left;
-      color:#929292;
-      text-shadow: 0px 0px 0px #000000;
-    }
-
-
-
-    .container {
-      margin-left: auto;
-      margin-right:auto;
-      position: relative;
-      width: 50%;
-    }
-    
-    .image {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
-    
-    .overlay {
-      position: absolute;
-      bottom: 100%;
-      left: 0;
-      right: 0;
-      background-color: #4b4b4b;
-      overflow: hidden;
-      width: 100%;
-      height: 0;
-      transition: .5s ease;
-    }
-    
-    .container:hover .overlay {
-      bottom: 0;
-      height: 100%;
-    }
-    
-    .text {
-      white-space: nowrap; 
-      color: #ffffff;
-      font-size: 1.5vw;
-      position: absolute;
-      overflow: hidden;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);}
 

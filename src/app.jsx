@@ -4,11 +4,17 @@ import { Login } from './login/login';
 import { Manager } from './manager/manager';
 import { Forum } from './forum/forum';
 import { About } from './about/about';
+import { AuthState } from './login/authState';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 export default function App() {
+
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+  const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+  const [authState, setAuthState] = React.useState(currentAuthState);
+
   return (
     <BrowserRouter>
     <div>
@@ -31,7 +37,20 @@ export default function App() {
       </header>
 
       <Routes>
-        <Route path='/' element={<Login />} exact />
+      <Route
+            path='/'
+            element={
+              <Login
+                userName={userName}
+                authState={authState}
+                onAuthChange={(userName, authState) => {
+                  setAuthState(authState);
+                  setUserName(userName);
+                }}
+              />
+            }
+            exact
+          />
         <Route path='/manager' element={<Manager />} />
         <Route path='/forum' element={<Forum />} />
         <Route path='/about' element={<About />} />
