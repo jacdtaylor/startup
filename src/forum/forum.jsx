@@ -1,87 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import "./shared.css"
+import { Notifier } from './forumMessage';
 
 export function Forum() {
-  const [playerName, setPlayerName] = useState('');
-  const [forum, setForum] = useState('Public');
-  const [messages, setMessages] = useState([]);
+  const [currentForum, setCurrentForum] = useState("Public");
+  const [events, setEvents] = useState([]);
   const [messageInput, setMessageInput] = useState('');
 
-  useEffect(() => {
-    setPlayerName(localStorage.getItem('userName') || 'guest');
-  }, []);
+  React.useEffect(() => {
+    Notifier.addHandler(handleGameEvent);
 
-  useEffect(() => {
-    configureWebSocket();
-  }, [forum]);
-
-  let socket;
-
-  const configureWebSocket = () => {
-    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-    socket.onopen = () => {
-      console.log('WebSocket connection established.');
+    return () => {
+      Notifier.removeHandler(handleGameEvent);
     };
+  }); // Empty dependency array to run only once on mount
 
-    socket.onerror = (error) => {
-      console.error('WebSocket error:', error);
-    };
+  function handleGameEvent(event) {
+    setEvents([...events, event]);
+  }
 
-    socket.onmessage = (event) => {
-      const receivedMessage = JSON.parse(event.data);
-      if (receivedMessage.forum === forum) {
-        setMessages((prevMessages) => [...prevMessages, receivedMessage]);
-        console.log("Recieved")
-      }
-    };
-  };
+  function createMessageArray() {
+    console.log(events)
+    return events.map((event, index) => (
+      <div key={index} className='event'>
+        <span className={'player-event'}style={{color: (event.from === localStorage.getItem('userName') ? "rgb(165, 220, 235)" : "rgb(221, 148, 40)")}}>{event.from.split('@')[0]}: </span>
+        {event.message}
+      </div>
+    ));
+  }
 
-  const sendMessage = () => {
+  function sendMessage() {
+    setEvents([...events, {from:localStorage.getItem('userName'), message:messageInput, forum:currentForum}]);
+    Notifier.broadcastEvent(localStorage.getItem('userName'),messageInput,currentForum);
+    setMessageInput("");
     
-    const trimmedMessage = messageInput.trim();
-    
-      
-      const newMessage = {
-        from: playerName,
-        message: trimmedMessage,
-        forum: forum
-      };
-      
-      socket.send(JSON.stringify(newMessage));
-     
-      setMessageInput('');
-    
-  };
+  }
 
-  const changeForum = () => {
-    const newForum = document.getElementById('forum-input').value.trim();
-    if (newForum !== '') {
-      setForum(newForum);
-      setMessages([]);
-    }
-  };
+  function changeForum(newForum) {
+    setCurrentForum(newForum);
+  }
 
   return (
     <main>
       <div>
         <input type="text" id="forum-input" placeholder="Enter new forum..." />
-        <button id="change-forum-btn" onClick={changeForum}>Change Forum</button>
+        <button id="change-forum-btn" onClick={() => changeForum("New Forum")}>Change Forum</button>
       </div>
 
       <br />
 
       <div id="chat-box">
         <div id="player-messages">
-          {messages.map((msg, index) => (
-            <div className="event" key={index}>
-              <div className="user-row">
-                <span className={msg.from === playerName ? 'CurrentUser' : 'OtherUser'}>
-                  {msg.from}:
-                </span> {msg.message}
-              </div>
-            </div>
-          ))}
+          {createMessageArray()}
         </div>
         <input
           type="text"
@@ -95,8 +65,9 @@ export function Forum() {
             }
           }}
         />
-        <button id="send-button" onClick={sendMessage}>Send</button>
+       
       </div>
+      <button className="send-button" onClick={sendMessage}>Send</button>
     </main>
   );
 }

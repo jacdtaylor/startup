@@ -9,6 +9,7 @@ class EventMessage {
 
 class messageNotifier {
 events = [];
+handlers = [];
 
 constructor() {
     let port = window.location.port;
@@ -20,15 +21,32 @@ constructor() {
             this.receiveEvent(event);
         } catch {}};}
 
+
+        addHandler(handler) {
+            this.handlers.push(handler);
+          }
+        
+          removeHandler(handler) {
+            this.handlers.filter((h) => h !== handler);
+          }
+        
+
 broadcastEvent(from, message, forum) {
     const event = new EventMessage(from, message, forum)
     this.socket.send(JSON.stringify(event));
+
 }
 
 receiveEvent(event) {
     this.events.push(event);
-}
-}
+
+    this.events.forEach((e) => {
+      this.handlers.forEach((handler) => {
+        handler(e);
+      });
+    });
+  }}
+
 
 const Notifier = new messageNotifier();
-export {GameNotifier};
+export {Notifier};
