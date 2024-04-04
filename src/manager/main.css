@@ -93,6 +93,7 @@ header {
   
 /* Footer styles */
   footer {
+    position: relative;
     background-color: #222; /* Darker background for footer */
     color: #fff;
     padding: 20px;
@@ -224,7 +225,7 @@ header {
   color: #f1f1f1;
   border: none;
   border-radius: 5px;
-  padding: 8px;
+  padding: 50px;
   font-size: 16px;
 }
 

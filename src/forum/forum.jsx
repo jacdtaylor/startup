@@ -80,7 +80,7 @@ export function Forum() {
             }
           }}
         />
-       
+       <br />
       <button className="send-button" onClick={sendMessage}>Send</button>
     </main>
   );

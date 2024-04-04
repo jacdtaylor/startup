@@ -3,18 +3,7 @@
     align-items: center; /* Align items vertically */
   }
   
-  .CurrentUser {
-    color: rgb(165, 220, 235); /* Set your desired color */
-    font-weight: bold;
-    margin-right: 10px; /* Add some space between username and text */
-  }
-  
-  .OtherUser {
-    color: rgb(221, 148, 40); /* Set your desired color */
-    font-weight: bold;
-    margin-right: 10px; /* Add some space between username and text */
-  }
-  
+
   .shared {
     color: white; /* Set your desired color */
   }
@@ -30,11 +19,17 @@
     border-radius: 5px;
     margin-top: 20px;
     position: relative;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-wrap: break-word; 
+    text-align: left;
   }
   
   #player-messages {
     max-height: 125px; /* Limit height of message container */
     overflow-y: auto; /* Add scrollbar when messages exceed container height */
+
   }
   
 
@@ -66,7 +61,8 @@
     background-color: #007bff; /* Blue send button color */
     color: #fff; /* Light text color */
     cursor: pointer;
-    position: absolute;
+    margin-right: auto;
+    margin-left: auto;
   }
   
   #send-button:hover {
