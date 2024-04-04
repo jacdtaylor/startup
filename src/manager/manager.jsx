@@ -58,8 +58,12 @@ export function Manager() {
   const displayTasks = () => {
     if (tasks.length) {
       const task = tasks[currentIndex];
+      const taskStyle = {
+        opacity: task.opacity
+      };
+  
       return (
-        <div>
+        <div style={taskStyle}>
           <h2 className="task-title">{task.title}</h2>
           <p className="task-date">{task.date}</p>
           <p className="completion-status">{task.completion}</p>
