@@ -25,10 +25,10 @@ footer {
   background-color: #222; /* Darker background for footer */
   color: #fff;
   text-align: center;
-  left:0;
-  bottom:0;
-  right:0;
-  position: static;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 

@@ -205,6 +205,7 @@ export function Manager() {
 
   return (
     <main>
+      <div className='manager-page'>
       <div className="task-container" id="task-container">
         {displayTasks()}
       </div>
@@ -223,6 +224,7 @@ export function Manager() {
             </tr>
           </tbody>
         </table>
+      </div>
       </div>
     </main>
   );

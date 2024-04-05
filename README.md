@@ -88,3 +88,10 @@ For this deliverable I implemented by JavaScript so that the application works f
 - **Frontend makes WebSocket connection** This is done in the shared.html page
 - **Data sent over WebSocket connection** Chat data is sent over the WebSocket Connection
 - **WebSocket data displayed in the application interface** Data is displayed in group forums
+
+
+## startup-react
+- **Bundled using Vite** Startup is bundled and compiled
+- **Multiple functional react components** Login, Manager and forum components are all working
+- **React Router** React Routes Implemented
+- **React Hooks** React Hooks used throughout code
