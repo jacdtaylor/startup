@@ -1,5 +1,24 @@
 .playerName {
-  color: rgb(118, 190, 210);
+  color: rgb(255, 172, 172);
   font-size: 1.5em;
   padding: 0.5em;
 }
+
+.loginbutton {
+  background-color: rgb(73, 73, 73);
+  font-size: 14px; /* Adjusted font size */
+  color: #f1f1f1;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px; /* Adjusted button padding */
+  margin: 5px; /* Adjusted margin */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.loginbutton:hover {
+  color: #ff6d6d;
+  background-color: rgb(46, 46, 46);
+}
+
+  

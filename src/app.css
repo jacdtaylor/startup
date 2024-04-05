@@ -6,8 +6,8 @@ body {
   color: #fff; /* Light text color */
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensures the layout stretches to at least the height of the viewport */
   text-align: center;
+  min-height: 100vh;
 }
 
 header {
@@ -24,13 +24,11 @@ header {
 footer {
   background-color: #222; /* Darker background for footer */
   color: #fff;
-  padding: 20px;
   text-align: center;
-  flex-shrink: 0; /* Prevents footer from shrinking */
-  position:absolute;
-left:0;
-bottom:0;
-right:0;
+  left:0;
+  bottom:0;
+  right:0;
+  position: static;
 }
 
 
@@ -52,6 +50,7 @@ right:0;
 .dropdown {
   position: relative;
   display: inline-block;
+  right: 2%;
 }
 
 .dropdown-content {
@@ -62,7 +61,7 @@ right:0;
   max-width: calc(100vw - 140px); /* Set max width to prevent overflow */
   z-index: 1;
   top: 100%; /* Position dropdown below button */
-  right: 0; /* Align dropdown to the right */
+  right: 5%; /* Align dropdown to the right */
   text-align: right;
 }
 

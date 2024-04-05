@@ -4,8 +4,24 @@ import "./main.css"
 export function Manager() {
   const [tasks, setTasks] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
+
+
+
+
+
+  function displayQuote() {
+    fetch('https://api.quotable.io/random')
+      .then((response) => response.json())
+      .then((data) => {
+        setQuote(data.content);
+        setAuthor(data.author);
+      });
+  }
 
   useEffect(() => {
+    displayQuote();
     retrieveTasks(currentIndex);
   }, [currentIndex]);
 
@@ -75,7 +91,8 @@ export function Manager() {
     } else {
       return (
         <div>
-          <p>Loading...</p>
+          {quote && <p className="quote">{quote}</p>}
+            {author && <p className="author">- {author}</p>}
         </div>
       );
     }
