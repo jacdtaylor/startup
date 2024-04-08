@@ -93,5 +93,5 @@ For this deliverable I implemented by JavaScript so that the application works f
 ## startup-react
 - **Bundled using Vite** Startup is bundled and compiled
 - **Multiple functional react components** Login, Manager and forum components are all working
-- **React Router** React Routes Implemented
-- **React Hooks** React Hooks used throughout code
+- **React Router** React Routes between the manager and the forum
+- **React Hooks** React Hooks used throughout to keep track of task and task index, along with messaging in the forum and the current forum selected.
